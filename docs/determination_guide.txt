@@ -1,0 +1,76 @@
+﻿Eligibility Determination for §16-802 ACTUAL INNOCENCE ANALYSIS FOR ALL CASES
+1. Was the client convicted in the case?
+Yes: This case is NOT ELIGIBLE under 16-802
+No: go to (2)
+2. Has it been more than 4 years since the termination of the case?
+Yes: This case is ELIGIBLE UNDER 16-802 if the client can prove that he or she is innocent. The burden of proof is clear and convincing evidence
+No: This case is ELIGIBLE under 16-802 if the client can prove that he or she is innocent. The burden of proof is preponderance of the evidence
+
+
+§16-803 Interest of Justice Analysis for FELONY Cases
+1. Is it a felony other than a BRA?
+Yes: go to (2)
+No: use the 16-803 analysis for ineligible misdemeanors (if it is a non-conviction) and the 16- 803 analysis for eligible misdemeanors (if it is a conviction)
+2. Is it a conviction?
+Yes: NOT ELIGIBLE under 16-803 (felony convictions other than for BRA are never eligible)
+No: go to (3)
+3. Was the case papered?
+Yes: go to (4)
+No: go to (5)
+4. Has it been 4 years since the client has been off papers in this case?
+Yes: go to (6)
+No: NOT YET ELIGIBLE under 16-803
+5. Has it been 3 years since the client has been off papers in this case?
+Yes: go to (6)
+No: NOT YET ELIGIBLE under 16-803
+6. Has it been 5 years since the client has been off papers for any misdemeanor conviction (other than for a minor offense listed in §16-801(10)), 10 years since the client has been off papers for any felony conviction, and does the client not have any pending cases (other than for a minor offense listed in §16- 801(10))?
+Yes: ELIGIBLE under 16-803 
+No: NOT YET ELIGIBLE under 16-803
+
+
+§16-803 Interest of Justice Analysis for MISDEMEANOR Cases
+1. Is it at an “ineligible” misdemeanor under §16-801(9)
+Yes: go to (2)
+No: go to (3)
+2. Is it a conviction?
+Yes: INELIGIBLE under 16-803
+No: go to (5)
+3. Is it a conviction?
+Yes: go to (11)
+No: go to (4)
+4. Has it been 2 years since the case was terminated?
+Yes: go to (8)
+No: NOT YET ELIGIBLE under 16-803
+5. Was the case papered?
+Yes: go to (6)
+No: go to (7)
+6. Has it been 4 years since the client has been off papers in this case?
+Yes: go to (8)
+No: NOT YET ELIGIBLE under 16-803
+7. Has it been 3 years since the client has been off papers in this case?
+Yes: go to (8)
+No: NOT YET ELIGIBLE under 16-803
+8. Has it been 5 years since the client has been off papers for any misdemeanor conviction, 10 years since the client has been off papers for any felony conviction, and does the client not have any pending cases (other than a minor offense listed in 16-801(10))?
+Yes: go to (9)
+No: NOT YET ELIGIBLE under 16-803
+9. Did client successfully complete a deferred sentencing agreement (DSA) in this case?
+Yes: go to (10)
+No: ELIGIBLE under 16-803
+10. Was client ever convicted of any offense (other than a minor offense as defined in §16-801(10)) after this case or ever been convicted of an ineligible misdemeanor or felony other than a BRA?
+Yes: NOT ELIGIBLE under 16-803
+No: ELIGIBLE under 16-803
+11. Has client ever been convicted of any offense (other than a minor offense as defined in §16-801(10)) after this conviction or ever been convicted of an ineligible misdemeanor or felony other than a BRA?
+Yes: NOT ELIGIBLE under 16-803
+No: go to (12)
+12. Has the client ever been convicted of felony BRA?
+No: go to (14)
+Yes: go to (13)
+13. Has it been 10 years since the client has been off papers in the felony BRA case?
+Yes: go to (14)
+No: NOT YET ELIGIBLE under 16-803
+14. Does the client have any pending cases (other than for minor offenses in §16-801(10))?
+Yes: NOT YET ELIGIBLE under 16-803
+No: go to (15)
+15. Has it been 8 years since the client has been off papers in this case?
+Yes: ELIGIBLE under 16-803
+No: NOT YET ELIGIBLE under 16-803
