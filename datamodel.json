@@ -1,27 +1,36 @@
 {
-    "evaluator": "Name Nameford Esquire",
-    "client": "Name Namington",
-    "caseId": "docket-XXX-abc-123",
-    "caseDate": "02-03-2019",
-    "evaluationDate": "09-13-2019",
-    "evaluatorNotes": {},
-    "clientData":{},
-    "evaluatorData": {},
+  "evaluatorName": "Name Nameford Esquire",
+  "evaluatorComments": "Some advice to the client",
+  "client": {
+    "dob": "01-01-1990",
+    "isOnProbation": true,
+    "name": "Name Namington",
+    "pdId": "xyz-123",
+    "pendingCases": [{ "offense": "22–3225.03a Misdemeanor insurance fraud" }]
+  },
+  "case": {
+    "id": "docket-XXX-abc-123",
+    "isConvicted": true,
+    "terminationDate": "02-03-2019",
     "charges": [
-        {
-            "charge": "a crime",
-            "classification": "felony",
-            "code": "22-401",
-            "outcome": "notGuilty",
-            "evaluation": {}
-        },
-        {
-            "charge": "a different crime",
-            "classification": "misdemeanor",
-            "code": "22–3225.03a Misdemeanor insurance fraud",
-            "outcome": "guilty",
-            "evaluation": {}
-        }
-    ],
-    "recommendation": "Some advice to the client"
+      {
+        "classification": "felony",
+        "dispositionDate": "01-01-2019",
+        "description": "a crime",
+        "isBRAFelony": true,
+        "isConvicted": true,
+        "isPapered": true,
+        "offense": "22-401"
+      },
+      {
+        "classification": "misdemeanor",
+        "description": "a different crime",
+        "dispositionDate": "01-01-2019",
+        "isBRAFelony": true,
+        "isConvicted": false,
+        "isPapered": true,
+        "offense": "22–3225.03a Misdemeanor insurance fraud"
+      }
+    ]
   }
+}
