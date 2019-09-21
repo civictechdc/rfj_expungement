@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "9.0.4",
     "react": "16.9.0",
-    "react-dom": "16.9.0"
+    "react-dom": "16.9.0",
+    "xstate": "^4.6.7"
   },
   "devDependencies": {
     "eslint": "^6.2.2",
