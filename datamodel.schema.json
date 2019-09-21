@@ -1,0 +1,65 @@
+{
+    "type": "object",
+    "required": [],
+    "properties": {
+      "evaluator": {
+        "type": "string"
+      },
+      "client": {
+        "type": "string"
+      },
+      "caseId": {
+        "type": "string"
+      },
+      "caseDate": {
+        "type": "string"
+      },
+      "evaluationDate": {
+        "type": "string"
+      },
+      "evaluatorNotes": {
+        "type": "object",
+        "required": [],
+        "properties": {}
+      },
+      "clientData": {
+        "type": "object",
+        "required": [],
+        "properties": {}
+      },
+      "evaluatorData": {
+        "type": "object",
+        "required": [],
+        "properties": {}
+      },
+      "charges": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [],
+          "properties": {
+            "charge": {
+              "type": "string"
+            },
+            "classification": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string"
+            },
+            "outcome": {
+              "type": "string"
+            },
+            "evaluation": {
+              "type": "object",
+              "required": [],
+              "properties": {}
+            }
+          }
+        }
+      },
+      "recommendation": {
+        "type": "string"
+      }
+    }
+  }
