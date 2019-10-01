@@ -1,65 +1,87 @@
 {
-    "type": "object",
-    "required": [],
-    "properties": {
-      "evaluator": {
-        "type": "string"
-      },
-      "client": {
-        "type": "string"
-      },
-      "caseId": {
-        "type": "string"
-      },
-      "caseDate": {
-        "type": "string"
-      },
-      "evaluationDate": {
-        "type": "string"
-      },
-      "evaluatorNotes": {
-        "type": "object",
-        "required": [],
-        "properties": {}
-      },
-      "clientData": {
-        "type": "object",
-        "required": [],
-        "properties": {}
-      },
-      "evaluatorData": {
-        "type": "object",
-        "required": [],
-        "properties": {}
-      },
-      "charges": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "required": [],
-          "properties": {
-            "charge": {
-              "type": "string"
-            },
-            "classification": {
-              "type": "string"
-            },
-            "code": {
-              "type": "string"
-            },
-            "outcome": {
-              "type": "string"
-            },
-            "evaluation": {
-              "type": "object",
-              "required": [],
-              "properties": {}
+  "type": "object",
+  "required": [],
+  "properties": {
+    "evaluatorName": {
+      "type": "string"
+    },
+    "evaluatorComments": {
+      "type": "string"
+    },
+    "client": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "pdId": {
+          "type": "string"
+        },
+        "pendingCases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "offense": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "isOnProbation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "isConvicted": {
+          "type": "boolean"
+        },
+        "terminationDate": {
+          "type": "string"
+        },
+        "charges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "classification": {
+                "type": "string"
+              },
+              "dispositionDate": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "isBRAFelony": {
+                "type": "boolean"
+              },
+              "isConvicted": {
+                "type": "boolean"
+              },
+              "isPapered": {
+                "type": "boolean"
+              },
+              "offense": {
+                "type": "string"
+              }
             }
           }
         }
-      },
-      "recommendation": {
-        "type": "string"
       }
     }
   }
+}
