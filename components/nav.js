@@ -1,4 +1,6 @@
-import React from "react";
+import React, { Fragment, useContext } from "react";
+
+// mui
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+
+// context
+import { CaseContext } from "../contexts/casecontroller";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    color: "#320570"
+    color: "#000000"
   },
   typography: {
     flexGrow: 1,
@@ -36,39 +41,44 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavBar(props) {
   const classes = useStyles();
+
   return (
-    <div className={classes.root}>
-      <AppBar style={{ backgroundColor: "#ffffff" }}>
-        <Toolbar>
-          <div style={{ display: "flex", flexGrow: 3, padding: "0 2vw" }}>
-            <Typography variant="h6" className={classes.title}>
-              {props.name}
-            </Typography>
+    <AppBar>
+      <Toolbar>
+        <CaseContext.Consumer>
+          {value => {
+            return (
+              <div style={{ display: "flex", flexGrow: 3, padding: "0 2vw" }}>
+                <Typography variant="h6" className={classes.title}>
+                  <p>{value.caseData.evaluatorName}</p>
+                </Typography>
 
-            <Typography
-              variant="h6"
-              className={classes.status}
-              style={{ color: props.status.color }}
-            >
-              {props.status.text}
-            </Typography>
-          </div>
+                <Typography
+                  variant="h6"
+                  className={classes.status}
+                  style={{ color: value.status.color }}
+                >
+                  <p>{value.status.text}</p>
+                </Typography>
+              </div>
+            );
+          }}
+        </CaseContext.Consumer>
 
-          <div style={{ display: "flex", flexGrow: 1 }}>
-            <Button color="inherit" className={classes.button}>
-              To Top
-            </Button>
+        <div style={{ display: "flex", flexGrow: 1 }}>
+          <Button color="inherit" className={classes.button}>
+            To Top
+          </Button>
 
-            <Button color="inherit" className={classes.button}>
-              Reset Form
-            </Button>
+          <Button color="inherit" className={classes.button}>
+            Reset Form
+          </Button>
 
-            <Button color="inherit" className={classes.button}>
-              Save to PDF
-            </Button>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
+          <Button color="inherit" className={classes.button}>
+            Save to PDF
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 }
