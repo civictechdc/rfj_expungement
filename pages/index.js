@@ -5,7 +5,6 @@ import Link from "next/link";
 import Head from "next/head";
 
 // core components
-import Nav from "../components/Nav";
 import BodyView from "../components/BodyView";
 
 // context
