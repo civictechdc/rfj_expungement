@@ -6,9 +6,10 @@ import Head from "next/head";
 
 // core components
 import BodyView from "../components/BodyView";
+import Nav from "../components/Nav";
 
 // context
-import { caseObj, InitializedProvider } from "../contexts/casecontroller";
+import { InitializedProvider } from "../contexts/casecontroller";
 
 // mui
 import {
@@ -52,7 +53,7 @@ function Home() {
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <InitializedProvider>
-            {/* <Nav></Nav> */}
+            <Nav></Nav>
             <Toolbar />
             <Container fixed>
               <Box my={2}>
