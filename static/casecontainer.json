@@ -1,0 +1,19 @@
+{
+    "evaluatorName": "Name Nameford Esquire",
+    "evaluatorComments": "Some advice to the client",
+    "client": {
+      "dob": "01-01-1990",
+      "isOnProbation": true,
+      "name": "Name Namington",
+      "pdId": "xyz-123",
+      "pendingCases": [{ "offense": "22–3225.03a Misdemeanor insurance fraud" }]
+    },
+    "case": {
+      "id": "",
+      "isConvicted": null,
+      "terminationDate": "",
+      "charges": [
+      ]
+    }
+  }
+  
