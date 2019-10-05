@@ -37,7 +37,7 @@ function CaseTable(props) {
             value.pushCharge();
           }}
         >
-          <Typography variant="h6">+ New Case</Typography>
+          <Typography variant="h6">+ New Charge</Typography>
         </CardActionArea>
       </div>
     </Card>
