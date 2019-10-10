@@ -30,6 +30,7 @@ class InitializedProvider extends React.Component {
     this.pushCharge = () => {
       this.setState({
         caseData: {
+          ...this.state.caseData,
           case: {
             charges: [
               ...this.state.caseData.case.charges,
