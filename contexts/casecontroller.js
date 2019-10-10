@@ -44,9 +44,10 @@ class InitializedProvider extends React.Component {
     };
 
     // Push new charge into charges field
-    this.pushCharge = this.state = {
+    this.state = {
       ...caseObj,
-      pushCharge: this.pushCharge
+      pushCharge: this.pushCharge,
+      reset: this.reset
     };
   }
 
