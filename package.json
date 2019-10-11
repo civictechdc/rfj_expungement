@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
     "@material-ui/core": "^4.4.2",
