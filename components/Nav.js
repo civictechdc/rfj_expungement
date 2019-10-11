@@ -71,10 +71,19 @@ export default function NavBar(props) {
             To Top
           </Button>
 
-          <Button color="inherit" className={classes.button}>
-            Reset Form
-          </Button>
-
+          <CaseContext.Consumer>
+            {value => {
+              return (
+                <Button
+                  color="inherit"
+                  className={classes.button}
+                  onClick={value.reset}
+                >
+                  Reset Form
+                </Button>
+              );
+            }}
+          </CaseContext.Consumer>
           <Button color="inherit" className={classes.button}>
             Save to PDF
           </Button>
