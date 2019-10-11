@@ -23,8 +23,11 @@ class InitializedProvider extends React.Component {
 
     // re-initialize
     this.reset = () => {
-      this.setState({ caseData: { ...caseContainer } });
-      this.setState({ status: { outcome: null, color: "grey", text: "" } });
+      this.setState({ 
+        caseData: { ...caseContainer }, 
+        status: { outcome: null, color: "grey", text: "" },
+        lastUpdated: new Date()
+       });
     };
 
     this.pushCharge = () => {
