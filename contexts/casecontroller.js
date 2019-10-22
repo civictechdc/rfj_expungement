@@ -23,11 +23,11 @@ class InitializedProvider extends React.Component {
 
     // re-initialize
     this.reset = () => {
-      this.setState({ 
-        caseData: { ...caseContainer }, 
+      this.setState({
+        caseData: { ...caseContainer },
         status: { outcome: null, color: "grey", text: "" },
         lastUpdated: new Date()
-       });
+      });
     };
 
     this.pushCharge = () => {
@@ -47,11 +47,18 @@ class InitializedProvider extends React.Component {
       return { ...this.chargeFormat };
     };
 
-    // Push new charge into charges field
+    // General purpose updater -- pass an object get a state update
+    this.updater = stateobj => {
+      this.setState(stateobj, () => {
+        console.log(this.state);
+      });
+    };
+
     this.state = {
       ...caseObj,
       pushCharge: this.pushCharge,
-      reset: this.reset
+      reset: this.reset,
+      updater: this.updater
     };
   }
 
