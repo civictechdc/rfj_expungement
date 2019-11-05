@@ -7,12 +7,10 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 // inputs
 import { Button, FormControlLabel } from "@material-ui/core";
 import ComposedDatePicker from "./ComposedDatePicker.js";
-import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 
 // components
