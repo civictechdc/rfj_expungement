@@ -39,7 +39,9 @@ function ComposedDatePicker(props) {
         margin="normal"
         id="date-picker-inline"
         label={props.label ? props.label : "Unlabeled Picker"}
+        openTo="year"
         value={dateState}
+        views={["year", "month", "date"]}
         onChange={handleDateChange}
         KeyboardButtonProps={{
           "aria-label": "change date"

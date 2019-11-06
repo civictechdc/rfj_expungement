@@ -50,6 +50,7 @@ function ClientInfoTable(props) {
       <Grid container justify="space-around" direction="column">
         <TextField
           id="name-field"
+          autoComplete='off'
           label="Client Name"
           value={clientName}
           onChange={e => setClientName(e.target.value)}
@@ -68,8 +69,9 @@ function ClientInfoTable(props) {
         ></FormControlLabel>
         <TextField
           id="pdid-field"
+          autoComplete='off'
           label="Client PD ID"
-          value={clientName}
+          value={pdId}
           onChange={e => setPdId(e.target.value)}
           margin="normal"
         />
