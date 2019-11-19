@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 import Collapse from "@material-ui/core/Collapse";
@@ -34,31 +34,33 @@ const CaseRow = (props) => {
     setShowForm(!showForm);
   };
 
-  const persistWithSetter = (setter, updateValue) => {
-    setter(updateValue)
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        case: {
-          ...value.caseData.case,
-          charges: {
-            ...value.caseData.case.charges,
-            [props.charge]:{
-              description: chargeDescription,
-              classification: chargeClassification,
-              isBRAFelony: chargeIsBRAFelony,
-              isConvicted: chargeIsConvicted,
-              isPapered: chargeIsPapered,
-              dispositionDate: chargeDispositionDate,
-              offense: chargeOffense,
+  useEffect(()=>{
+      value.updater({
+        caseData: {
+          ...value.caseData,
+          case: {
+            ...value.caseData.case,
+            charges: {
+              ...value.caseData.case.charges,
+              [props.charge]:{
+                description: chargeDescription,
+                classification: chargeClassification,
+                isBRAFelony: chargeIsBRAFelony,
+                isConvicted: chargeIsConvicted,
+                isPapered: chargeIsPapered,
+                dispositionDate: chargeDispositionDate,
+                offense: chargeOffense,
 
+              }
             }
           }
         }
-      }
-    })
+      })
+    }, [chargeDescription, chargeClassification, chargeIsBRAFelony,
+    chargeIsConvicted, chargeIsPapered, chargeOffense, chargeDispositionDate]
+  )
 
-  }
+
 
   return (
     <Card>
@@ -78,21 +80,21 @@ const CaseRow = (props) => {
           autoComplete='off'
           label="Offense"
           value={chargeOffense}
-          onChange={e => persistWithSetter(setChargeOffense, e.target.value)}
+          onChange={e => setChargeOffense(e.target.value)}
           margin="normal"
         />
         <ComposedDatePicker
           ctxKeys={["caseData", "case", "charges", props.charge]}
           label={"Disposition Date"}
           initialDate={chargeDispositionDate}
-          hoist={e => persistWithSetter(setChargeDispositionDate, e)}
+          hoist={e => setChargeDispositionDate(e)}
         />
         <TextField
           id="classification-field"
           autoComplete='off'
           label="Classification"
           value={chargeClassification}
-          onChange={e => persistWithSetter(setChargeClassification, e.target.value)}
+          onChange={e => setChargeClassification(e.target.value)}
           margin="normal"
         />
         <TextField
@@ -100,7 +102,7 @@ const CaseRow = (props) => {
           autoComplete='off'
           label="Description"
           value={chargeDescription}
-          onChange={e => persistWithSetter(setChargeDescription, e.target.value)}
+          onChange={e => setChargeDescription(e.target.value)}
           margin="normal"
         />
         <FormControlLabel
@@ -108,7 +110,7 @@ const CaseRow = (props) => {
             <Switch
               checked={chargeIsPapered}
               onChange={
-                e => persistWithSetter(setChargeIsPapered, e.target.checked)
+                e => setChargeIsPapered(e.target.checked)
               }
               value="ChargeIsPapered"
               inputProps={{ "aria-label": "ChargeIsPapered checkbox" }}
@@ -121,7 +123,7 @@ const CaseRow = (props) => {
             <Switch
               checked={chargeIsBRAFelony}
               onChange={
-                e => persistWithSetter(setIsBRAFelony, e.target.checked)
+                e => setIsBRAFelony(e.target.checked)
               }
               value="ChargeIsBRAFelony"
               inputProps={{ "aria-label": "ChargeIsBRAFelony checkbox" }}
@@ -134,7 +136,7 @@ const CaseRow = (props) => {
             <Switch
               checked={chargeIsConvicted}
               onChange={
-                e => persistWithSetter(setChargeIsConvicted, e.target.checked)
+                e => setChargeIsConvicted(e.target.checked)
               }
               value="ChargeIsConvicted"
               inputProps={{ "aria-label": "ChargeIsConvicted checkbox" }}
