@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 import Collapse from "@material-ui/core/Collapse";
@@ -8,9 +8,11 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AlbumRoundedIcon from '@material-ui/icons/AlbumRounded';
 import TextField from "@material-ui/core/TextField";
 import ComposedDatePicker from "./ComposedDatePicker.js";
 import { Button, FormControlLabel } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography"
 import Switch from "@material-ui/core/Switch";
 
 const CaseRow = (props) => {
@@ -60,20 +62,44 @@ const CaseRow = (props) => {
     chargeIsConvicted, chargeIsPapered, chargeOffense, chargeDispositionDate]
   )
 
+  const renderIndicator = () => {
+    let chargeData = value.caseData.case.charges[props.charge]
+    if (chargeData.hasOwnProperty('analysis')){
+      console.log("Found an analysis for this charge!")
+      switch (chargeData.analysis.indicator){
+        case "ELIGIBLE":
+          return 'blue';
+        case "INELIGIBLE":
+          return 'red';
+        default:
+          return 'grey';
+      }
+    }
+  }
 
+  const renderAnalysisMessage = () => {
+    let chargeData = value.caseData.case.charges[props.charge]
+    if (chargeData.hasOwnProperty('analysis')){
+      return <Typography>{chargeData.analysis.message}</Typography>
+    }
+  }
 
   return (
     <Card>
       <CardHeader
         title={props.charge}
         action={
+          <Fragment>
+          <AlbumRoundedIcon htmlColor={renderIndicator()}/>
           <IconButton aria-label="Show form" onClick={handleExpandClick}>
             <ExpandMoreIcon />
           </IconButton>
+          </Fragment>
         }
       />
       <Collapse in={showForm} timeout="auto" unmountOnExit>
       <CardContent>
+        {renderAnalysisMessage()}
       <Grid container justify="space-around" direction="column">
       <TextField
           id="offense-field"

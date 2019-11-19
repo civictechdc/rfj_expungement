@@ -1,10 +1,10 @@
 {
-    "evaluatorName": "Name Nameford Esquire",
+    "evaluatorName": "Jane Smith Esq",
     "evaluatorComments": "Some advice to the client",
     "client": {
       "dob": "01-01-1990",
       "isOnProbation": true,
-      "name": "Name Namington",
+      "name": "Joe Smith",
       "pdId": "xyz-123",
       "pendingCases": [{ "offense": "22–3225.03a Misdemeanor insurance fraud" }]
     },
