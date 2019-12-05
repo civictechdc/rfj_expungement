@@ -51,7 +51,7 @@ function Home() {
     <Fragment>
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
+        <div>
           <InitializedProvider>
             <Nav></Nav>
             <Toolbar />

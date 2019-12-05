@@ -27,12 +27,17 @@ function ClientInfoTable(props) {
   );
   const [clientName, setClientName] = useState(value.caseData.client.name);
   const [pdId, setPdId] = useState(value.caseData.client.pdId);
+  const [terminationDate, setTerminationDate] = useState(value.caseData.case.terminationDate);
   // can we get away with omitting pending cases?
 
   const persist = () => {
     value.updater({
       caseData: {
         ...value.caseData,
+        case: {
+          ...value.caseData.case,
+          terminationDate: terminationDate
+        },
         client: {
           ...value.caseData.client,
           dob: dob,
@@ -80,6 +85,12 @@ function ClientInfoTable(props) {
           label={"Client DOB"}
           initialDate={dob}
           hoist={setDob}
+        />
+        <ComposedDatePicker
+          ctxKeys={["caseData", "case", "terminationDate"]}
+          label={"Case Terminated On"}
+          initialDate={new Date()}
+          hoist={setTerminationDate}
         />
       </Grid>
       <Button onClick={persist}>
