@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 
+import ReactDOM from 'react-dom';
+import {Editor, EditorState} from 'draft-js';
+
+
+
+
+
+
+
+
+
+
+
+
+
 // next
 import Link from "next/link";
 import Head from "next/head";
@@ -59,6 +74,11 @@ function Home() {
               <Box my={2}>
                 <BodyView />
               </Box>
+            </Container>
+            <Container fixed>
+              <p>
+                "deb test"
+              </p>
             </Container>
           </InitializedProvider>
         </div>

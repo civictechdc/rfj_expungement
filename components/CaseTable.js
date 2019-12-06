@@ -18,6 +18,8 @@ import CaseRow from "./CaseRow";
 import ClientInfoTable from "./ClientInfoTable";
 import EvaluatorInfoTable from "./EvaluatorInfoTable";
 
+import AttyExtraNotes from "./AttyExtraNotes";
+
 const useStyles = makeStyles(theme => ({
   table: {}
 }));
@@ -33,6 +35,7 @@ function CaseTable(props) {
       ></CardHeader>
       <div>
         <EvaluatorInfoTable />
+        
         <ClientInfoTable />
         {/* Cases in Context object */}
         <div>
@@ -40,6 +43,8 @@ function CaseTable(props) {
             return <CaseRow key={`${idx}-chrge`} charge={charge} />;
           })}
         </div>
+
+        <AttyExtraNotes />
 
         <CardActionArea
           onClick={() => {
