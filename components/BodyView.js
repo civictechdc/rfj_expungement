@@ -24,7 +24,7 @@ function BodyView(props) {
   return (
     <Fragment>
     <Container className={classes.body}>
-      <Grid direction='column'>
+      <Grid container direction='column'>
         <CaseTable />
       </Grid>
     <div>Produced with ❤️ in Washington DC by <a href="https://codefordc.org/"> Code For DC</a></div>

@@ -11,6 +11,7 @@ import { Button, FormControlLabel } from "@material-ui/core";
 import ComposedDatePicker from "./ComposedDatePicker.js";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
+import NoteEditor from "./NoteEditor";
 
 // components
 
@@ -60,6 +61,9 @@ function ClientInfoTable(props) {
           value={clientName}
           onChange={e => setClientName(e.target.value)}
           margin="normal"
+        />
+        <NoteEditor
+          label="Evaluator Notes about Client:"
         />
         <FormControlLabel
           control={
