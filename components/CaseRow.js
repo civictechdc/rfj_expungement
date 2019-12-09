@@ -14,6 +14,7 @@ import ComposedDatePicker from "./ComposedDatePicker.js";
 import { Button, FormControlLabel } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const CaseRow = props => {
   const [showForm, setShowForm] = useState(false);
@@ -127,18 +128,24 @@ const CaseRow = props => {
             />
             <TextField
               id="classification-field"
+              select
               autoComplete="off"
               label="Classification"
               value={chargeClassification}
               SelectProps={{
-                native: true,
-                MenuProps: {
-                  className: ClassificationType
-                }
+                native: true
               }}
               onChange={e => setChargeClassification(e.target.value)}
               margin="normal"
-            />
+            >
+              <option key="" value="Select Classification"></option>
+              <option key="1" value="Felony">
+                Felony
+              </option>
+              <option key="2" value="Misdemeanor">
+                Misdemeanor
+              </option>
+            </TextField>
             <TextField
               id="description-field"
               autoComplete="off"
