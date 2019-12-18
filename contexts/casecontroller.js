@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import caseContainer from "../static/casecontainer.json";
 import chargeContainer from "../static/chargecontainer.json";
+import evaluateHelper from "../libs/evaluator.js";
 
 let caseObj = {
   caseData: { ...caseContainer },
@@ -18,7 +19,28 @@ class InitializedProvider extends React.Component {
     super(props);
 
     this.evaluate = () => {
-      // TODO implement rules.json
+      let chargesData = this.state.caseData.case.charges;
+      Object.keys(chargesData).map(charge => {
+        let analysis = evaluateHelper(this.state.caseData, chargesData[charge]);
+        this.setState(
+          {
+            caseData: {
+              ...this.state.caseData,
+              case: {
+                ...this.state.caseData.case,
+                charges: {
+                  ...this.state.caseData.case.charges,
+                  [charge]: {
+                    ...this.state.caseData.case.charges[charge],
+                    analysis: analysis
+                  }
+                }
+              }
+            }
+          },
+          () => console.log(this.state)
+        );
+      });
     };
 
     // re-initialize
@@ -30,15 +52,16 @@ class InitializedProvider extends React.Component {
       });
     };
 
-    this.pushCharge = () => {
+    this.pushCharge = charge => {
       this.setState({
         caseData: {
           ...this.state.caseData,
           case: {
-            charges: [
+            ...this.state.caseData.case,
+            charges: {
               ...this.state.caseData.case.charges,
-              { ...this.chargeFormat }
-            ]
+              [charge]: { ...this.state.chargeFormat }
+            }
           }
         }
       });
@@ -47,11 +70,19 @@ class InitializedProvider extends React.Component {
       return { ...this.chargeFormat };
     };
 
-    // Push new charge into charges field
+    // General purpose updater -- pass an object get a state update
+    this.updater = stateobj => {
+      this.setState(stateobj, () => {
+        // TODO: Move this somewhere that calls much less frequently
+        this.evaluate();
+      });
+    };
+
     this.state = {
       ...caseObj,
       pushCharge: this.pushCharge,
-      reset: this.reset
+      reset: this.reset,
+      updater: this.updater
     };
   }
 

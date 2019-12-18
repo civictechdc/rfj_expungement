@@ -41,13 +41,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+//DB: if you want text to show up at bottom of screen, put in "" in b/n <p>'s
 function Home() {
   const classes = useStyles();
   return (
     <Fragment>
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
+        <div>
           <InitializedProvider>
             <Nav></Nav>
             <Toolbar />
@@ -55,6 +56,9 @@ function Home() {
               <Box my={2}>
                 <BodyView />
               </Box>
+            </Container>
+            <Container fixed>
+              <p></p>
             </Container>
           </InitializedProvider>
         </div>
