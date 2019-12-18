@@ -1,6 +1,6 @@
 {
     "evaluatorName": "Jane Smith Esq",
-    "evaluatorComments": "Some advice to the client",
+    "evaluatorComments": "Advice to client / notes about case",
     "client": {
       "dob": "01-01-1990",
       "isOnProbation": true,

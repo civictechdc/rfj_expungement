@@ -17,6 +17,8 @@ import Switch from "@material-ui/core/Switch";
 import CaseRow from "./CaseRow";
 import ClientInfoTable from "./ClientInfoTable";
 import EvaluatorInfoTable from "./EvaluatorInfoTable";
+import EvaluatorCommentsTable from "./EvaluatorCommentsTable";
+
 
 const useStyles = makeStyles(theme => ({
   table: {}
@@ -33,6 +35,9 @@ function CaseTable(props) {
       ></CardHeader>
       <div>
         <EvaluatorInfoTable />
+
+        <EvaluatorCommentsTable />
+        
         <ClientInfoTable />
         {/* Cases in Context object */}
         <div>
@@ -40,6 +45,8 @@ function CaseTable(props) {
             return <CaseRow key={`${idx}-chrge`} charge={charge} />;
           })}
         </div>
+
+        
 
         <CardActionArea
           onClick={() => {
