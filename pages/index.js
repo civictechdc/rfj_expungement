@@ -3,18 +3,6 @@ import React, { useState } from "react";
 import ReactDOM from 'react-dom';
 import {Editor, EditorState} from 'draft-js';
 
-
-
-
-
-
-
-
-
-
-
-
-
 // next
 import Link from "next/link";
 import Head from "next/head";
@@ -60,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+//DB: if you want text to show up at bottom of screen, put in "" in b/n <p>'s
 function Home() {
   const classes = useStyles();
   return (
@@ -77,7 +66,7 @@ function Home() {
             </Container>
             <Container fixed>
               <p>
-                "deb test"
+                
               </p>
             </Container>
           </InitializedProvider>

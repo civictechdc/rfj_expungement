@@ -12,6 +12,7 @@ import ComposedDatePicker from "./ComposedDatePicker.js";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 import NoteEditor from "./NoteEditor";
+import color from "@material-ui/core/colors/amber";
 
 // components
 
@@ -86,8 +87,8 @@ function ClientInfoTable(props) {
         />
         <ComposedDatePicker
           ctxKeys={["caseData", "client", "dob"]}
-          label={"Client DOB"}
-          initialDate={dob}
+          label={"Client DOB"}          
+          initialDate={dob}              
           hoist={setDob}
         />
         <ComposedDatePicker
@@ -98,7 +99,7 @@ function ClientInfoTable(props) {
         />
       </Grid>
       <Button onClick={persist}>
-        <Typography>Persist Casedata</Typography>
+        <Typography>Persist Casedata</Typography>              
       </Button>
     </Fragment>
   );

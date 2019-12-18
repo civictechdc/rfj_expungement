@@ -18,28 +18,27 @@ const useStyles = makeStyles(theme => ({
   table: {}
 }));
 
-function AttyExtraNotes(props) {
+function EvaluatorCommentsTable(props) {
   const classes = useStyles();
   const value = useContext(CaseContext);
-  const [name, setName] = useState(value.caseData.evaluatorName);
+  const [name, setName] = useState(value.caseData.evaluatorComments);
   
   const persist = (name) => {
     setName(name)
     value.updater({
       caseData: {
         ...value.caseData,
-        evaluatorName: name 
+        evaluatorComments: name 
         }
     });
   };
 
   return (
     <Fragment>
-      <Typography variant="h5">Attorney Extra Notes:</Typography>
+      <Typography variant="h5">Evaluator Comments:</Typography>
       <Grid container justify="space-around" direction="column">
         <TextField
-          id="name-field"
-          //label="Evaluator Name"
+          id="comments-field"
           multiline
           value={name}
           onChange={e => persist(e.target.value)}
@@ -50,4 +49,4 @@ function AttyExtraNotes(props) {
   );
 }
 
-export default AttyExtraNotes;
+export default EvaluatorCommentsTable;
