@@ -1,7 +1,6 @@
 import React from "react";
 
 // components
-import CaseRow from "./CaseRow.js";
 import CaseTable from "./CaseTable.js";
 
 // mui
@@ -14,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function BodyView(props) {
+function BodyView() {
   const classes = useStyles();
   return (
     <div className={classes.body}>

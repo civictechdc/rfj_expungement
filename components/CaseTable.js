@@ -1,23 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
-import { Button } from "@material-ui/core";
 
 // components
 import CaseRow from "./CaseRow";
 
-const useStyles = makeStyles(theme => ({
-  table: {}
-}));
-
-function CaseTable(props) {
-  const classes = useStyles();
+function CaseTable() {
   const value = useContext(CaseContext);
 
   return (

@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 import caseContainer from "../static/casecontainer.json";
 import chargeContainer from "../static/chargecontainer.json";
 
@@ -23,11 +23,11 @@ class InitializedProvider extends React.Component {
 
     // re-initialize
     this.reset = () => {
-      this.setState({ 
-        caseData: { ...caseContainer }, 
+      this.setState({
+        caseData: { ...caseContainer },
         status: { outcome: null, color: "grey", text: "" },
         lastUpdated: new Date()
-       });
+      });
     };
 
     this.pushCharge = () => {
