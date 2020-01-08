@@ -19,7 +19,6 @@ import ClientInfoTable from "./ClientInfoTable";
 import EvaluatorInfoTable from "./EvaluatorInfoTable";
 import EvaluatorCommentsTable from "./EvaluatorCommentsTable";
 
-
 const useStyles = makeStyles(theme => ({
   table: {}
 }));
@@ -37,7 +36,7 @@ function CaseTable(props) {
         <EvaluatorInfoTable />
 
         <EvaluatorCommentsTable />
-        
+
         <ClientInfoTable />
         {/* Cases in Context object */}
         <div>
@@ -46,11 +45,9 @@ function CaseTable(props) {
           })}
         </div>
 
-        
-
         <CardActionArea
           onClick={() => {
-            let chargeNum = Object.keys(value.caseData.case.charges).length
+            let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
             value.pushCharge(`Charge ${chargeNum}`);
           }}
         >

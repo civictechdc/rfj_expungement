@@ -19,26 +19,28 @@ class InitializedProvider extends React.Component {
     super(props);
 
     this.evaluate = () => {
-      let chargesData = this.state.caseData.case.charges
-      Object.keys(chargesData).map((charge)=>{
-        let analysis = evaluateHelper(this.state.caseData, chargesData[charge])
-        this.setState({
-          caseData:{
-            ...this.state.caseData,
-            case:{
-              ...this.state.caseData.case,
-              charges:{
-                ...this.state.caseData.case.charges,
-                [charge]:{
-                  ...this.state.caseData.case.charges[charge],
-                  analysis: analysis
+      let chargesData = this.state.caseData.case.charges;
+      Object.keys(chargesData).map(charge => {
+        let analysis = evaluateHelper(this.state.caseData, chargesData[charge]);
+        this.setState(
+          {
+            caseData: {
+              ...this.state.caseData,
+              case: {
+                ...this.state.caseData.case,
+                charges: {
+                  ...this.state.caseData.case.charges,
+                  [charge]: {
+                    ...this.state.caseData.case.charges[charge],
+                    analysis: analysis
+                  }
                 }
               }
             }
-          }
-        }, ()=>console.log(this.state))
-      })
-      
+          },
+          () => console.log(this.state)
+        );
+      });
     };
 
     // re-initialize
@@ -50,7 +52,7 @@ class InitializedProvider extends React.Component {
       });
     };
 
-    this.pushCharge = (charge) => {
+    this.pushCharge = charge => {
       this.setState({
         caseData: {
           ...this.state.caseData,
@@ -58,12 +60,11 @@ class InitializedProvider extends React.Component {
             ...this.state.caseData.case,
             charges: {
               ...this.state.caseData.case.charges,
-              [charge]: {  ...this.state.chargeFormat }
+              [charge]: { ...this.state.chargeFormat }
             }
           }
         }
       });
-      //this.state.caseData.case.charges.push({ ...caseObj.chargeFormat });
       this.setState({ lastUpdated: new Date() });
       return { ...this.chargeFormat };
     };
@@ -72,7 +73,7 @@ class InitializedProvider extends React.Component {
     this.updater = stateobj => {
       this.setState(stateobj, () => {
         // TODO: Move this somewhere that calls much less frequently
-        this.evaluate()
+        this.evaluate();
       });
     };
 
