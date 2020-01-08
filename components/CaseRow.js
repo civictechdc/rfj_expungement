@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, Fragment } from "react";
+import React, { useState, useContext, useEffect, Fragment, useRef } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 import Collapse from "@material-ui/core/Collapse";
@@ -19,6 +19,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 const CaseRow = props => {
   const [showForm, setShowForm] = useState(false);
   const value = useContext(CaseContext);
+  let timerRef = useRef( null );
+  let TIMEOUT_DURATION = 1000;
 
   // Charge properties
   const chargeObj = value.caseData.case.charges[props.charge];
@@ -43,26 +45,29 @@ const CaseRow = props => {
   };
 
   useEffect(() => {
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        case: {
-          ...value.caseData.case,
-          charges: {
-            ...value.caseData.case.charges,
-            [props.charge]: {
-              description: chargeDescription,
-              classification: chargeClassification,
-              isBRAFelony: chargeIsBRAFelony,
-              isConvicted: chargeIsConvicted,
-              isPapered: chargeIsPapered,
-              dispositionDate: chargeDispositionDate,
-              offense: chargeOffense
+    timerRef.current = setTimeout(()=>{
+      value.updater({
+        caseData: {
+          ...value.caseData,
+          case: {
+            ...value.caseData.case,
+            charges: {
+              ...value.caseData.case.charges,
+              [props.charge]: {
+                description: chargeDescription,
+                classification: chargeClassification,
+                isBRAFelony: chargeIsBRAFelony,
+                isConvicted: chargeIsConvicted,
+                isPapered: chargeIsPapered,
+                dispositionDate: chargeDispositionDate,
+                offense: chargeOffense
+              }
             }
           }
         }
-      }
-    });
+      });  
+    }, TIMEOUT_DURATION)
+    
   }, [
     chargeDescription,
     chargeClassification,
