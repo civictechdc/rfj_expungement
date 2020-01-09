@@ -13,12 +13,7 @@ import ClientInfoTable from "./ClientInfoTable";
 import EvaluatorInfoTable from "./EvaluatorInfoTable";
 import EvaluatorCommentsTable from "./EvaluatorCommentsTable";
 
-const useStyles = makeStyles(theme => ({
-  table: {}
-}));
-
-function CaseTable(props) {
-  const classes = useStyles();
+function CaseTable() {
   const value = useContext(CaseContext);
 
   return (
