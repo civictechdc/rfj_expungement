@@ -87,8 +87,8 @@ function ClientInfoTable(props) {
         />
         <ComposedDatePicker
           ctxKeys={["caseData", "client", "dob"]}
-          label={"Client DOB"}          
-          initialDate={dob}              
+          label={"Client DOB"}
+          initialDate={new Date()}
           hoist={setDob}
         />
         <ComposedDatePicker
@@ -99,7 +99,7 @@ function ClientInfoTable(props) {
         />
       </Grid>
       <Button onClick={persist}>
-        <Typography>Persist Casedata</Typography>              
+        <Typography>Persist Casedata</Typography>
       </Button>
     </Fragment>
   );
