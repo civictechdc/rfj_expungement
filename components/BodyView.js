@@ -28,7 +28,7 @@ function BodyView() {
         </Grid>
         <div>
           Produced with ❤️ in Washington DC by{" "}
-          <a href="https://codefordc.org/"> Code For DC</a>
+          <a href="https://codefordc.org/">Code For DC</a>
         </div>
       </Container>
     </Fragment>

@@ -65,7 +65,6 @@ class InitializedProvider extends React.Component {
           }
         }
       });
-      //this.state.caseData.case.charges.push({ ...caseObj.chargeFormat });
       this.setState({ lastUpdated: new Date() });
       return { ...this.chargeFormat };
     };

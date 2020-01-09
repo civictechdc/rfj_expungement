@@ -13,7 +13,12 @@ import ClientInfoTable from "./ClientInfoTable";
 import EvaluatorInfoTable from "./EvaluatorInfoTable";
 import EvaluatorCommentsTable from "./EvaluatorCommentsTable";
 
-function CaseTable() {
+const useStyles = makeStyles(theme => ({
+  table: {}
+}));
+
+function CaseTable(props) {
+  const classes = useStyles();
   const value = useContext(CaseContext);
 
   return (
@@ -36,7 +41,7 @@ function CaseTable() {
 
         <CardActionArea
           onClick={() => {
-            let chargeNum = Object.keys(value.caseData.case.charges).length;
+            let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
             value.pushCharge(`Charge ${chargeNum}`);
           }}
         >

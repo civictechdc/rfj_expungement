@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment, useRef } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
@@ -23,14 +23,27 @@ function EvaluatorInfoTable(props) {
   const value = useContext(CaseContext);
   const [name, setName] = useState(value.caseData.evaluatorName);
 
-  const persist = name => {
+  let timerRef = useRef( null );
+  let TIMEOUT_DURATION = 1000;
+
+  const persist = (name) => {
+    
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+
     setName(name);
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        evaluatorName: name
-      }
-    });
+
+    // Only update the store when we need to
+    timerRef.current = setTimeout(() => {
+      value.updater({
+        caseData: {
+          ...value.caseData,
+          evaluatorName: name
+        }
+      });
+    }, TIMEOUT_DURATION);
   };
 
   return (
