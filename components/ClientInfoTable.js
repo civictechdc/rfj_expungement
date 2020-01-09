@@ -98,7 +98,7 @@ function ClientInfoTable(props) {
           hoist={setTerminationDate}
         />
       </Grid>
-      <Button onClick={persist}>
+      <Button onClick={persist} variant="contained" color="primary">
         <Typography>Persist Casedata</Typography>
       </Button>
     </Fragment>
