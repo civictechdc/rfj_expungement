@@ -72,7 +72,6 @@ function printResult(valid, message) {
   console.log(valid, message);
 }
 
-
 // let state = {
 //   evaluatorName: "Name Nameford Esquire",
 //   evaluatorComments: "Some advice to the client",
@@ -110,9 +109,8 @@ function printResult(valid, message) {
 //   }
 // };
 
-
 // function anyConvictions(caseData){
-  
+
 //   Object.keys(caseData.case.charges).map((charge)=>{
 //     let chargeObj = caseData.case.charges[charge]
 //     if (chargeObj.isConvicted === true){

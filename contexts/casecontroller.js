@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 import caseContainer from "../static/casecontainer.json";
 import chargeContainer from "../static/chargecontainer.json";
 import evaluateHelper from "../libs/evaluator.js";
