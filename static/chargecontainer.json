@@ -1,9 +1,9 @@
 {
-    "classification": "",
-    "dispositionDate": "",
-    "description": "",
-    "isBRAFelony": null,
-    "isConvicted": null,
-    "isPapered": null,
-    "offense": ""
-  }
+  "classification": "",
+  "dispositionDate": "",
+  "description": "",
+  "isBRAFelony": null,
+  "isConvicted": null,
+  "isPapered": null,
+  "offense": ""
+}
