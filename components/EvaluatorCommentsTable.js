@@ -22,14 +22,14 @@ function EvaluatorCommentsTable(props) {
   const classes = useStyles();
   const value = useContext(CaseContext);
   const [name, setName] = useState(value.caseData.evaluatorComments);
-  
-  const persist = (name) => {
-    setName(name)
+
+  const persist = name => {
+    setName(name);
     value.updater({
       caseData: {
         ...value.caseData,
-        evaluatorComments: name 
-        }
+        evaluatorComments: name
+      }
     });
   };
 
@@ -44,7 +44,7 @@ function EvaluatorCommentsTable(props) {
           onChange={e => persist(e.target.value)}
           margin="normal"
         />
-        </Grid>
+      </Grid>
     </Fragment>
   );
 }

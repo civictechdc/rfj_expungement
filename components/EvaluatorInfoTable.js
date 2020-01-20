@@ -22,6 +22,7 @@ function EvaluatorInfoTable(props) {
   const classes = useStyles();
   const value = useContext(CaseContext);
   const [name, setName] = useState(value.caseData.evaluatorName);
+
   let timerRef = useRef( null );
   let TIMEOUT_DURATION = 1000;
 
@@ -56,7 +57,7 @@ function EvaluatorInfoTable(props) {
           onChange={e => persist(e.target.value)}
           margin="normal"
         />
-        </Grid>
+      </Grid>
     </Fragment>
   );
 }

@@ -29,7 +29,9 @@ function ClientInfoTable(props) {
   );
   const [clientName, setClientName] = useState(value.caseData.client.name);
   const [pdId, setPdId] = useState(value.caseData.client.pdId);
-  const [terminationDate, setTerminationDate] = useState(value.caseData.case.terminationDate);
+  const [terminationDate, setTerminationDate] = useState(
+    value.caseData.case.terminationDate
+  );
   // can we get away with omitting pending cases?
 
   const persist = () => {
@@ -57,15 +59,13 @@ function ClientInfoTable(props) {
       <Grid container justify="space-around" direction="column">
         <TextField
           id="name-field"
-          autoComplete='off'
+          autoComplete="off"
           label="Client Name"
           value={clientName}
           onChange={e => setClientName(e.target.value)}
           margin="normal"
         />
-        <NoteEditor
-          label="Evaluator Notes about Client:"
-        />
+        <NoteEditor label="Evaluator Notes about Client:" />
         <FormControlLabel
           control={
             <Switch
@@ -79,7 +79,7 @@ function ClientInfoTable(props) {
         ></FormControlLabel>
         <TextField
           id="pdid-field"
-          autoComplete='off'
+          autoComplete="off"
           label="Client PD ID"
           value={pdId}
           onChange={e => setPdId(e.target.value)}
@@ -88,7 +88,7 @@ function ClientInfoTable(props) {
         <ComposedDatePicker
           ctxKeys={["caseData", "client", "dob"]}
           label={"Client DOB"}
-          initialDate={new Date()}
+          initialDate={dob}
           hoist={setDob}
         />
         <ComposedDatePicker
@@ -98,7 +98,7 @@ function ClientInfoTable(props) {
           hoist={setTerminationDate}
         />
       </Grid>
-      <Button onClick={persist}>
+      <Button onClick={persist} variant="contained" color="primary">
         <Typography>Persist Casedata</Typography>
       </Button>
     </Fragment>

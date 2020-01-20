@@ -1,11 +1,4 @@
-import React, { useState } from "react";
-
-import ReactDOM from 'react-dom';
-import {Editor, EditorState} from 'draft-js';
-
-// next
-import Link from "next/link";
-import Head from "next/head";
+import React from "react";
 
 // core components
 import BodyView from "../components/BodyView";
@@ -36,7 +29,7 @@ const theme = createMuiTheme({
   direction: "rtl"
 });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     color: "#320570",
     position: "fixed",
@@ -65,9 +58,7 @@ function Home() {
               </Box>
             </Container>
             <Container fixed>
-              <p>
-                
-              </p>
+              <p></p>
             </Container>
           </InitializedProvider>
         </div>

@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect, Fragment } from "react";
+import React, { useState, useContext, useEffect, Fragment, useRef } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AlbumRoundedIcon from "@material-ui/icons/AlbumRounded";
 import TextField from "@material-ui/core/TextField";
 import ComposedDatePicker from "./ComposedDatePicker.js";
@@ -19,6 +19,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 const CaseRow = props => {
   const [showForm, setShowForm] = useState(false);
   const value = useContext(CaseContext);
+  let timerRef = useRef( null );
+  let TIMEOUT_DURATION = 1000;
 
   // Charge properties
   const chargeObj = value.caseData.case.charges[props.charge];
@@ -43,26 +45,29 @@ const CaseRow = props => {
   };
 
   useEffect(() => {
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        case: {
-          ...value.caseData.case,
-          charges: {
-            ...value.caseData.case.charges,
-            [props.charge]: {
-              description: chargeDescription,
-              classification: chargeClassification,
-              isBRAFelony: chargeIsBRAFelony,
-              isConvicted: chargeIsConvicted,
-              isPapered: chargeIsPapered,
-              dispositionDate: chargeDispositionDate,
-              offense: chargeOffense
+    timerRef.current = setTimeout(()=>{
+      value.updater({
+        caseData: {
+          ...value.caseData,
+          case: {
+            ...value.caseData.case,
+            charges: {
+              ...value.caseData.case.charges,
+              [props.charge]: {
+                description: chargeDescription,
+                classification: chargeClassification,
+                isBRAFelony: chargeIsBRAFelony,
+                isConvicted: chargeIsConvicted,
+                isPapered: chargeIsPapered,
+                dispositionDate: chargeDispositionDate,
+                offense: chargeOffense
+              }
             }
           }
         }
-      }
-    });
+      });  
+    }, TIMEOUT_DURATION)
+    
   }, [
     chargeDescription,
     chargeClassification,
