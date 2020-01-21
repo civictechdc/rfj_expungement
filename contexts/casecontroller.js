@@ -22,24 +22,21 @@ class InitializedProvider extends React.Component {
       let chargesData = this.state.caseData.case.charges;
       Object.keys(chargesData).map(charge => {
         let analysis = evaluateHelper(this.state.caseData, chargesData[charge]);
-        this.setState(
-          {
-            caseData: {
-              ...this.state.caseData,
-              case: {
-                ...this.state.caseData.case,
-                charges: {
-                  ...this.state.caseData.case.charges,
-                  [charge]: {
-                    ...this.state.caseData.case.charges[charge],
-                    analysis: analysis
-                  }
+        this.setState({
+          caseData: {
+            ...this.state.caseData,
+            case: {
+              ...this.state.caseData.case,
+              charges: {
+                ...this.state.caseData.case.charges,
+                [charge]: {
+                  ...this.state.caseData.case.charges[charge],
+                  analysis: analysis
                 }
               }
             }
-          },
-          () => console.log(this.state)
-        );
+          }
+        });
       });
     };
 

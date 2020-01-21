@@ -9,7 +9,7 @@ function determineActualInnocence(caseData, chargeData) {
   if (chargeData.isConvicted) {
     return determineInterestsOfJustice(caseData, chargeData);
   } else {
-    return fourYearsSinceTermination(caseData, chargeData);
+    return fourYearsSinceTermination(caseData.case.terminationDate);
   }
 }
 
@@ -45,12 +45,10 @@ function determineIoJMisdemeanor(caseData, chargeData) {
   };
 }
 
-function fourYearsSinceTermination(caseData, chargeData) {
-  let year = parseInt(caseData.case.terminationDate.split("-")[2]);
-  let today = new Date().getFullYear();
-  let diff = today - year;
-
-  if (diff > 4) {
+function fourYearsSinceTermination(terminationDate) {
+  let then = new Date(terminationDate),
+    now = new Date();
+  if (diffYears(then, now) > 4) {
     return {
       indicator: "ELIGIBLE",
       message:
@@ -65,4 +63,10 @@ function fourYearsSinceTermination(caseData, chargeData) {
   }
 }
 
+function diffYears(then, later) {
+  const seconds = (later.getTime() - then.getTime()) / 1000;
+  return seconds / 60 / 60 / 24 / 365.25;
+}
+
+export { diffYears, fourYearsSinceTermination, determineActualInnocence };
 export default chainAllDeterminations;
