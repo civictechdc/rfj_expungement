@@ -49,12 +49,49 @@ class InitializedProvider extends React.Component {
       });
     };
 
+    this.nextPdfLine = y => {
+      return y + 10;
+    };
+
     this.saveDataToPDF = () => {
       // when adding new controller code, it needs to be added to this.state = ...
       const jsPDF = require("jspdf");
       const pdf = new jsPDF();
-      pdf.text("Client Name", 10, 10);
-      pdf.text(this.state.caseData.client.name, 50, 10);
+      let x = 10;
+      let y = 0;
+      y = this.nextPdfLine(y);
+      pdf.text("Evaluator Name", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.evaluatorName, x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Evaluator Comments", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.evaluatorComments, x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Client Name", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.client.name, x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Client Is On Probation", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.client.isOnProbation + "", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Client PD ID", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.client.pdId, x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Client Date Of Birth", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.client.dob, x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Client Case Termination Date", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text(this.state.caseData.case.terminationDate, x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("Charge # ", x, y);
+      y = this.nextPdfLine(y);
+      pdf.text("TBD", x, y);
+      y = this.nextPdfLine(y);
       pdf.save("data.pdf");
       // or try
       // https://www.npmjs.com/package/pdf-lib
