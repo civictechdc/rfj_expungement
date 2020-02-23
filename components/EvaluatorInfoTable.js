@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment, useRef } from "react";
+import React, { useState, useContext, useEffect, Fragment, useRef } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
@@ -25,6 +25,20 @@ function EvaluatorInfoTable(props) {
 
   let timerRef = useRef( null );
   let TIMEOUT_DURATION = 1000;
+
+  useEffect(() => {
+    // for reset button
+    // https://stackoverflow.com/questions/54625831/how-to-sync-props-to-state-using-react-hooks-setstate
+    // useEffect is called after every render
+    // [props] below says this useEffect will only run when props have changed
+    // props are coming in from parent html attribute
+    // useContext syncs the field to global, preventing local differences .. bad
+    // useState allows user to make local edits
+    // persist writes the useState values to the controller and context
+    // reset takes the json values from file and passes them as new props object to components
+    // therefore reset depends on props at every level and useEffect based on props
+    setName(props.caseData.evaluatorName);
+  }, [props]);
 
   const persist = (name) => {
     
