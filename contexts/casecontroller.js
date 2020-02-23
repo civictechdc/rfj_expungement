@@ -82,11 +82,11 @@ class InitializedProvider extends React.Component {
       y = this.nextPdfLine(y);
       pdf.text("Client Date Of Birth", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.client.dob, x, y);
+      pdf.text(this.state.caseData.client.dob + "", x, y);
       y = this.nextPdfLine(y);
       pdf.text("Client Case Termination Date", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.case.terminationDate, x, y);
+      pdf.text(this.state.caseData.case.terminationDate + "", x, y);
       y = this.nextPdfLine(y);
       pdf.text("Charge # ", x, y);
       y = this.nextPdfLine(y);

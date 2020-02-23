@@ -7,7 +7,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "precommit": "lint-staged",
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
@@ -21,7 +20,7 @@
     "draft-js": "^0.11.2",
     "html2pdf.js": "^0.9.2",
     "jspdf": "^1.5.3",
-    "next": "^9.0.6",
+    "next": "^9.2.3-canary.10",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "xstate": "^4.6.7"
