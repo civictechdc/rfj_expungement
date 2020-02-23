@@ -112,7 +112,7 @@ function ClientInfoTable(props) {
         <ComposedDatePicker
           ctxKeys={["caseData", "case", "terminationDate"]}
           label={"Case Terminated On"}
-          initialDate={new Date()}
+          initialDate={terminationDate}
           hoist={setTerminationDate}
         />
       </Grid>
