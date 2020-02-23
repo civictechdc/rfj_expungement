@@ -21,7 +21,7 @@ function CaseTable() {
       <CardHeader
         title={<Typography variant="h4">Case Info:</Typography>}
       ></CardHeader>
-      <div>
+      <div id="element-to-print">
         <EvaluatorInfoTable />
 
         <EvaluatorCommentsTable />
