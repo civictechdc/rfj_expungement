@@ -22,11 +22,11 @@ function CaseTable() {
         title={<Typography variant="h4">Case Info:</Typography>}
       ></CardHeader>
       <div>
-        <EvaluatorInfoTable />
+        <EvaluatorInfoTable caseData={value.caseData} />
 
-        <EvaluatorCommentsTable />
+        <EvaluatorCommentsTable caseData={value.caseData} />
 
-        <ClientInfoTable />
+        <ClientInfoTable caseData={value.caseData} />
         {/* Cases in Context object */}
         <div>
           {Object.keys(value.caseData.case.charges).map((charge, idx) => {
