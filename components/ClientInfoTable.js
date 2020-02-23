@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
@@ -33,6 +33,24 @@ function ClientInfoTable(props) {
     value.caseData.case.terminationDate
   );
   // can we get away with omitting pending cases?
+
+  useEffect(() => {
+    // for reset button
+    // https://stackoverflow.com/questions/54625831/how-to-sync-props-to-state-using-react-hooks-setstate
+    // useEffect is called after every render
+    // [props] below says this useEffect will only run when props have changed
+    // props are coming in from parent html attribute
+    // useContext syncs the field to global, preventing local differences .. bad
+    // useState allows user to make local edits
+    // persist writes the useState values to the controller and context
+    // reset takes the json values from file and passes them as new props object to components
+    // therefore reset depends on props at every level and useEffect based on props
+    setDob(props.caseData.client.dob);
+    setOnProbation(props.caseData.client.isOnProbation);
+    setClientName(props.caseData.client.name);
+    setPdId(props.caseData.client.pdId);
+    setTerminationDate(props.caseData.case.terminationDate);
+  }, [props]);
 
   const persist = () => {
     value.updater({
