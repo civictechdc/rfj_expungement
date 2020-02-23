@@ -88,10 +88,16 @@ class InitializedProvider extends React.Component {
       y = this.nextPdfLine(y);
       pdf.text(this.state.caseData.case.terminationDate + "", x, y);
       y = this.nextPdfLine(y);
-      pdf.text("Charge # ", x, y);
-      y = this.nextPdfLine(y);
-      pdf.text("TBD", x, y);
-      y = this.nextPdfLine(y);
+
+      // TODO store charges in an ordered array before trying to print
+      // let chargeNum = 0;
+      // this.state.caseData.case.charges.forEach(charge => {
+      //   chargeNum += 1;
+      //   pdf.text("Charge "+chargeNum, x, y);
+      //   y = this.nextPdfLine(y);
+      //   pdf.text("TBD", x, y);
+      //   y = this.nextPdfLine(y);
+      // });
       pdf.save("data.pdf");
       // or try
       // https://www.npmjs.com/package/pdf-lib
