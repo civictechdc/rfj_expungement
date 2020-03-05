@@ -2,7 +2,7 @@
   "evaluatorName": "Jane Smith Esq",
   "evaluatorComments": "Advice to client / notes about case",
   "client": {
-    "dob": "01-01-1990",
+    "dob": "01/01/1990",
     "isOnProbation": true,
     "name": "Joe Smith",
     "pdId": "xyz-123",

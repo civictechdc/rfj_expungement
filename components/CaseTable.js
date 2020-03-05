@@ -30,7 +30,7 @@ function CaseTable() {
         {/* Cases in Context object */}
         <div>
           {Object.keys(value.caseData.case.charges).map((charge, idx) => {
-            return <CaseRow key={`${idx}-chrge`} charge={charge} />;
+            return <CaseRow key={`${idx}-charge`} charge={charge} />;
           })}
         </div>
 
