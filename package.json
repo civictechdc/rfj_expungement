@@ -7,7 +7,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "precommit": "lint-staged",
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
