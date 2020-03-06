@@ -31,10 +31,18 @@ function determineInterestsOfJustice(caseData, chargeData) {
 }
 
 function determineIoJFelony(caseData, chargeData) {
-  return {
-    indicator: null,
-    message: "Cannot determine Interests of Justice analysis for felonies yet"
-  };
+  if (chargeData.isBRAFelony) {
+    return {
+      indicator: "ELIGIBLE",
+      message: "Eligible under Interests of Justice Analysis"
+    };
+  } else {
+    return {
+      indicator: null,
+      message:
+        "Cannot determine Interests of Justice analysis for non-BRA felonies yet"
+    };
+  }
 }
 
 function determineIoJMisdemeanor(caseData, chargeData) {
