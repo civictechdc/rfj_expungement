@@ -5,7 +5,6 @@ import CaseTable from "./CaseTable.js";
 
 // mui
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 

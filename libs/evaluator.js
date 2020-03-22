@@ -18,9 +18,9 @@ function determineInterestsOfJustice(caseData, chargeData) {
   // Route to appropriate evaluator based on felony
   switch (chargeData.classification.toLowerCase()) {
     case "misdemeanor":
-      return determineIoJMisdemeanor(caseData, chargeData);
+      return determineIoJMisdemeanor();
     case "felony":
-      return determineIoJFelony(caseData, chargeData);
+      return determineIoJFelony();
     default:
       return {
         indicator: null,
@@ -30,14 +30,14 @@ function determineInterestsOfJustice(caseData, chargeData) {
   }
 }
 
-function determineIoJFelony(caseData, chargeData) {
+function determineIoJFelony() {
   return {
     indicator: null,
     message: "Cannot determine Interests of Justice analysis for felonies yet"
   };
 }
 
-function determineIoJMisdemeanor(caseData, chargeData) {
+function determineIoJMisdemeanor() {
   return {
     indicator: null,
     message:

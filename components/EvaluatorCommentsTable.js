@@ -2,24 +2,13 @@ import React, { useState, useContext, Fragment } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 // inputs
-import { Button, FormControlLabel } from "@material-ui/core";
-import ComposedDatePicker from "./ComposedDatePicker.js";
 import TextField from "@material-ui/core/TextField";
-import Switch from "@material-ui/core/Switch";
 
-// components
-
-const useStyles = makeStyles(theme => ({
-  table: {}
-}));
-
-function EvaluatorCommentsTable(props) {
-  const classes = useStyles();
+function EvaluatorCommentsTable() {
   const value = useContext(CaseContext);
   const [name, setName] = useState(value.caseData.evaluatorComments);
 

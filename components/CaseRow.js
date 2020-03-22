@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect, Fragment, useRef } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  Fragment,
+  useRef
+} from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 import Collapse from "@material-ui/core/Collapse";
@@ -11,15 +17,14 @@ import CardContent from "@material-ui/core/CardContent";
 import AlbumRoundedIcon from "@material-ui/icons/AlbumRounded";
 import TextField from "@material-ui/core/TextField";
 import ComposedDatePicker from "./ComposedDatePicker.js";
-import { Button, FormControlLabel } from "@material-ui/core";
+import { FormControlLabel } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
-import MenuItem from "@material-ui/core/MenuItem";
 
 const CaseRow = props => {
   const [showForm, setShowForm] = useState(false);
   const value = useContext(CaseContext);
-  let timerRef = useRef( null );
+  let timerRef = useRef(null);
   let TIMEOUT_DURATION = 1000;
 
   // Charge properties
@@ -45,7 +50,7 @@ const CaseRow = props => {
   };
 
   useEffect(() => {
-    timerRef.current = setTimeout(()=>{
+    timerRef.current = setTimeout(() => {
       value.updater({
         caseData: {
           ...value.caseData,
@@ -65,9 +70,8 @@ const CaseRow = props => {
             }
           }
         }
-      });  
-    }, TIMEOUT_DURATION)
-    
+      });
+    }, TIMEOUT_DURATION);
   }, [
     chargeDescription,
     chargeClassification,
@@ -80,7 +84,7 @@ const CaseRow = props => {
 
   const renderIndicator = () => {
     let chargeData = value.caseData.case.charges[props.charge];
-    if (chargeData.hasOwnProperty("analysis")) {
+    if (Object.prototype.hasOwnProperty.call(chargeData, "analysis")) {
       console.log("Found an analysis for this charge!");
       switch (chargeData.analysis.indicator) {
         case "ELIGIBLE":
@@ -95,7 +99,7 @@ const CaseRow = props => {
 
   const renderAnalysisMessage = () => {
     let chargeData = value.caseData.case.charges[props.charge];
-    if (chargeData.hasOwnProperty("analysis")) {
+    if (Object.prototype.hasOwnProperty.call(chargeData, "analysis")) {
       return <Typography>{chargeData.analysis.message}</Typography>;
     }
   };
