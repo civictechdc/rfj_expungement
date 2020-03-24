@@ -1,36 +1,16 @@
 {
-  "evaluatorName": "Jane Smith Esq",
-  "evaluatorComments": "Advice to client / notes about case",
+  "evaluatorName": "",
+  "evaluatorComments": "",
   "client": {
     "dob": "01/01/1990",
     "isOnProbation": true,
     "name": "Joe Smith",
-    "pdId": "xyz-123",
-    "pendingCases": [{ "offense": "22–3225.03a Misdemeanor insurance fraud" }]
+    "pdId": "xyz-123"
   },
   "case": {
     "id": "",
     "isConvicted": null,
     "terminationDate": "",
-    "charges": {
-      "Charge 1": {
-        "classification": "Felony",
-        "dispositionDate": "05/09/2019",
-        "description": "a crime",
-        "isBRAFelony": true,
-        "isConvicted": true,
-        "isPapered": true,
-        "offense": "22-401"
-      },
-      "Charge 2": {
-        "classification": "misdemeanor",
-        "description": "a different crime",
-        "dispositionDate": "01/01/2019",
-        "isBRAFelony": true,
-        "isConvicted": false,
-        "isPapered": true,
-        "offense": "22–3225.03a Misdemeanor insurance fraud"
-      }
-    }
+    "charges": {}
   }
 }

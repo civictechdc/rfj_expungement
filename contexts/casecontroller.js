@@ -21,7 +21,6 @@ class InitializedProvider extends React.Component {
     this.evaluate = () => {
       let chargesData = this.state.caseData.case.charges;
       Object.keys(chargesData).map(charge => {
-        let analysis = evaluateHelper(this.state.caseData, chargesData[charge]);
         this.setState({
           caseData: {
             ...this.state.caseData,
@@ -31,7 +30,10 @@ class InitializedProvider extends React.Component {
                 ...this.state.caseData.case.charges,
                 [charge]: {
                   ...this.state.caseData.case.charges[charge],
-                  analysis: analysis
+                  analysis: evaluateHelper(
+                    this.state.caseData,
+                    chargesData[charge]
+                  )
                 }
               }
             }
@@ -40,8 +42,8 @@ class InitializedProvider extends React.Component {
       });
     };
 
-    // re-initialize
     this.reset = () => {
+      // re-initialize
       this.setState({
         caseData: { ...caseContainer },
         status: { outcome: null, color: "grey", text: "" },
@@ -69,8 +71,7 @@ class InitializedProvider extends React.Component {
     // General purpose updater -- pass an object get a state update
     this.updater = stateobj => {
       this.setState(stateobj, () => {
-        // TODO: Move this somewhere that calls much less frequently
-        this.evaluate();
+        this.evaluate(); // TODO: Move this somewhere that calls much less frequently
       });
     };
 
