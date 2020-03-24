@@ -2,14 +2,14 @@
   "evaluatorName": "",
   "evaluatorComments": "",
   "client": {
-    "dob": "01/01/1990",
-    "isOnProbation": true,
-    "name": "Joe Smith",
-    "pdId": "xyz-123"
+    "dob": "",
+    "isOnProbation": false,
+    "name": "",
+    "pdId": ""
   },
   "case": {
     "id": "",
-    "isConvicted": null,
+    "isConvicted": false,
     "terminationDate": "",
     "charges": {}
   }

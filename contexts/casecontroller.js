@@ -5,10 +5,8 @@ import evaluateHelper from "../libs/evaluator.js";
 
 let caseObj = {
   caseData: { ...caseContainer },
-  lastUpdated: new Date(),
   status: { outcome: null, color: "grey", text: "" },
-  // Remember what a charge looks like
-  chargeFormat: { ...chargeContainer }
+  chargeFormat: { ...chargeContainer } // Remember what a charge looks like
 };
 
 const CaseContext = createContext(caseObj);
@@ -46,8 +44,7 @@ class InitializedProvider extends React.Component {
       // re-initialize
       this.setState({
         caseData: { ...caseContainer },
-        status: { outcome: null, color: "grey", text: "" },
-        lastUpdated: new Date()
+        status: { outcome: null, color: "grey", text: "" }
       });
     };
 
@@ -64,8 +61,6 @@ class InitializedProvider extends React.Component {
           }
         }
       });
-      this.setState({ lastUpdated: new Date() });
-      return { ...this.chargeFormat };
     };
 
     // General purpose updater -- pass an object get a state update
