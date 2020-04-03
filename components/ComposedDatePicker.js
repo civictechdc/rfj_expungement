@@ -7,13 +7,13 @@ import {
 } from "@material-ui/pickers";
 
 function ComposedDatePicker(props) {
-  const [dateState, setDateState] = useState(
-    props.initialDate ? props.initialDate : new Date()
-  );
+  const [dateState, setDateState] = useState(null);
 
   const handleDateChange = date => {
     setDateState(date);
-    props.hoist(date);
+    if ("hoist" in props) {
+      props.hoist(date);
+    }
   };
 
   return (
