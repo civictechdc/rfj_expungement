@@ -34,12 +34,7 @@ function CaseTable() {
           })}
         </div>
 
-        <CardActionArea
-          onClick={() => {
-            let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
-            value.pushCharge(`Charge ${chargeNum}`);
-          }}
-        >
+        <CardActionArea onClick={value.pushCharge}>
           <Typography variant="h6">+ New Charge</Typography>
         </CardActionArea>
       </div>

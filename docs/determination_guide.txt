@@ -24,12 +24,12 @@ No: NOT YET ELIGIBLE under 16-803
 Yes: go to (6)
 No: NOT YET ELIGIBLE under 16-803
 6. Has it been 5 years since the client has been off papers for any misdemeanor conviction (other than for a minor offense listed in §16-801(10)), 10 years since the client has been off papers for any felony conviction, and does the client not have any pending cases (other than for a minor offense listed in §16- 801(10))?
-Yes: ELIGIBLE under 16-803 
+Yes: ELIGIBLE under 16-803
 No: NOT YET ELIGIBLE under 16-803
 
 
 §16-803 Interest of Justice Analysis for MISDEMEANOR Cases
-1. Is it at an “ineligible” misdemeanor under §16-801(9)
+1. Is it an “ineligible” misdemeanor under §16-801(9)
 Yes: go to (2)
 No: go to (3)
 2. Is it a conviction?

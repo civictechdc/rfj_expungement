@@ -1,3 +1,25 @@
+function getAnalysis(
+  description,
+  classification,
+  isBRAFelony
+  // chargeIsConvicted,
+  // chargeIsPapered,
+  // offense,
+  // chargeDispositionDate
+) {
+  if (isBRAFelony) {
+    return {
+      message: "Sorry! No BRA felonies can be expunged.",
+      indicator: "red"
+    };
+  } else {
+    return {
+      message: "Eligible for expungement!",
+      indicator: "green"
+    };
+  }
+}
+
 function chainAllDeterminations(caseData, chargeData) {
   // a function for collecting the result of all determinations
   return determineActualInnocence(caseData, chargeData);
@@ -32,14 +54,14 @@ function determineInterestsOfJustice(caseData, chargeData) {
 
 function determineIoJFelony() {
   return {
-    indicator: null,
+    indicator: "yellow",
     message: "Cannot determine Interests of Justice analysis for felonies yet"
   };
 }
 
 function determineIoJMisdemeanor() {
   return {
-    indicator: null,
+    indicator: "yellow",
     message:
       "Cannot determine Interests of Justice analysis for misdemeanors yet"
   };
@@ -68,5 +90,10 @@ function diffYears(then, later) {
   return seconds / 60 / 60 / 24 / 365.25;
 }
 
-export { diffYears, fourYearsSinceTermination, determineActualInnocence };
+export {
+  getAnalysis,
+  diffYears,
+  fourYearsSinceTermination,
+  determineActualInnocence
+};
 export default chainAllDeterminations;
