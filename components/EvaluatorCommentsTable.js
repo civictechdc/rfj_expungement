@@ -28,6 +28,7 @@ function EvaluatorCommentsTable() {
       <Grid container justify="space-around" direction="column">
         <TextField
           id="comments-field"
+          label="Advice to client or notes about case"
           multiline
           value={name}
           onChange={e => persist(e.target.value)}
