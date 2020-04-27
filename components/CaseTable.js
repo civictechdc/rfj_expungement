@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
@@ -17,12 +17,32 @@ import Switch from "@material-ui/core/Switch";
 // components
 import CaseRow from "./CaseRow";
 
-function CaseTable() {
+function CaseTable(props) {
   const value = useContext(CaseContext);
 
+  const [name, setName] = useState(value.caseData.evaluatorName);
   const [terminationDate, setTerminationDate] = useState(
     value.caseData.case.terminationDate
   );
+  const [birthDate, setBirthDate] = useState(
+    value.caseData.client.dob
+  );
+  const [isOnProbation, setOnProbation] = useState(
+    value.caseData.client.isOnProbation
+  );
+  const [clientName, setClientName] = useState(value.caseData.client.name);
+  const [pdId, setPdId] = useState(value.caseData.client.pdId);
+  const [comments, setComments] = useState(value.caseData.evaluatorComments);
+
+  useEffect(() => {
+    setName(props.caseData.evaluatorName);
+    setOnProbation(props.caseData.client.isOnProbation);
+    setClientName(props.caseData.client.name);
+    setPdId(props.caseData.client.pdId);
+    setComments(props.caseData.evaluatorComments);
+    setTerminationDate(props.caseData.case.terminationDate);
+    setBirthDate(props.caseData.client.dob);
+  }, [props]);
 
   return (
     <Card>
@@ -30,47 +50,53 @@ function CaseTable() {
         title={<Typography variant="h4">Case Info:</Typography>}
       ></CardHeader>
       <Grid container direction="column">
-        <TextField label="Evaluator Name" />
-        <TextField label="Advice to client or notes about case" multiline />
-        <TextField label="Client Name" autoComplete="off" />
+        <TextField 
+          label="Evaluator Name" 
+          value={name} 
+          onChange={e => setName(e.target.value)}
+          />
+        <TextField 
+          label="Advice to client or notes about case" 
+          multiline 
+          value={comments} 
+          onChange={e => setComments(e.target.value)}
+        />
+        <TextField 
+          label="Client Name" 
+          autoComplete="off"
+          value={clientName} 
+          onChange={e => setClientName(e.target.value)}
+       />
         <FormControlLabel
           control={
-            <Switch inputProps={{ "aria-label": "isOnProbation checkbox" }} />
+            <Switch 
+              checked={isOnProbation}
+              onChange={e => setOnProbation(e.target.checked)}
+              inputProps={{ "aria-label": "isOnProbation checkbox" }} 
+            />
           }
           label="Is on Probation"
         ></FormControlLabel>
-        <TextField label="Client PD ID" autoComplete="off" />
-        <ComposedDatePicker label={"Client DOB"} />
+        <TextField 
+          label="Client PD ID" 
+          autoComplete="off" 
+          value={pdId} 
+          onChange={e => setPdId(e.target.value)}
+        />
+        <ComposedDatePicker 
+          label={"Client DOB"} 
+          hoist={e => setBirthDate(e)}
+          initialDate={birthDate} 
+        />
         <ComposedDatePicker
           label={"Case Terminated On"}
           hoist={e => setTerminationDate(e)}
+          initialDate={terminationDate}
         />
       </Grid>
 
       {/* Cases in Context object */}
       <div>
-/* RFJ-64-Reset-Form
-        <EvaluatorInfoTable caseData={value.caseData} />
-
-        <EvaluatorCommentsTable caseData={value.caseData} />
-
-        <ClientInfoTable caseData={value.caseData} />
-        {/* Cases in Context object */}
-        <div>
-          {Object.keys(value.caseData.case.charges).map((charge, idx) => {
-            return <CaseRow key={`${idx}-chrge`} charge={charge} />;
-          })}
-        </div>
-
-        <CardActionArea
-          onClick={() => {
-            let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
-            value.pushCharge(`Charge ${chargeNum}`);
-          }}
-        >
-          <Typography variant="h6">+ New Charge</Typography>
-        </CardActionArea>
-RFJ-64-Reset-Form */
         {Object.keys(value.caseData.case.charges).map((charge, idx) => {
           return (
             <CaseRow

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { CaseContext } from "../contexts/casecontroller";
 
 // components
 import CaseTable from "./CaseTable.js";
@@ -17,10 +19,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function BodyView() {
+  const value = useContext(CaseContext);
   const classes = useStyles();
   return (
     <Container className={classes.body}>
-      <CaseTable />
+      <CaseTable caseData={value.caseData}/>
       <div>
         Produced with ❤️ in Washington DC by{" "}
         <a href="https://codefordc.org/">Code For DC</a>

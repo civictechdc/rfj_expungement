@@ -8,7 +8,7 @@ import {
 } from "@material-ui/pickers";
 
 function ComposedDatePicker(props) {
-  const [dateState, setDateState] = useState(null);
+  const [dateState, setDateState] = useState(props.initialDate);
 
   const handleDateChange = date => {
     setDateState(date);
