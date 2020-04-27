@@ -5,10 +5,8 @@ import evaluateHelper from "../libs/evaluator.js";
 
 let caseObj = {
   caseData: { ...caseContainer },
-  lastUpdated: new Date(),
   status: { outcome: null, color: "grey", text: "" },
-  // Remember what a charge looks like
-  chargeFormat: { ...chargeContainer }
+  chargeFormat: { ...chargeContainer } // Remember what a charge looks like
 };
 
 const CaseContext = createContext(caseObj);
@@ -21,7 +19,6 @@ class InitializedProvider extends React.Component {
     this.evaluate = () => {
       let chargesData = this.state.caseData.case.charges;
       Object.keys(chargesData).map(charge => {
-        let analysis = evaluateHelper(this.state.caseData, chargesData[charge]);
         this.setState({
           caseData: {
             ...this.state.caseData,
@@ -31,7 +28,10 @@ class InitializedProvider extends React.Component {
                 ...this.state.caseData.case.charges,
                 [charge]: {
                   ...this.state.caseData.case.charges[charge],
-                  analysis: analysis
+                  analysis: evaluateHelper(
+                    this.state.caseData,
+                    chargesData[charge]
+                  )
                 }
               }
             }
@@ -40,37 +40,30 @@ class InitializedProvider extends React.Component {
       });
     };
 
-    // re-initialize
     this.reset = () => {
+      // re-initialize
       this.setState({
         caseData: { ...caseContainer },
-        status: { outcome: null, color: "grey", text: "" },
-        lastUpdated: new Date()
+        status: { outcome: null, color: "grey", text: "" }
       });
     };
 
-    this.pushCharge = charge => {
-      this.setState({
-        caseData: {
-          ...this.state.caseData,
-          case: {
-            ...this.state.caseData.case,
-            charges: {
-              ...this.state.caseData.case.charges,
-              [charge]: { ...this.state.chargeFormat }
-            }
-          }
-        }
-      });
-      this.setState({ lastUpdated: new Date() });
-      return { ...this.chargeFormat };
+    this.pushCharge = () => {
+      let chargeNum = Object.keys(this.state.caseData.case.charges).length + 1;
+      let oldState = this.state.caseData.case.charges;
+      let newState = this.state.caseData.case.charges;
+      newState[`Charge ${chargeNum}`] = this.state.chargeFormat;
+      this.setState({ oldState, newState });
+
+      this.setState((state, props) => ({
+        counter: state.counter + props.increment
+      }));
     };
 
     // General purpose updater -- pass an object get a state update
     this.updater = stateobj => {
       this.setState(stateobj, () => {
-        // TODO: Move this somewhere that calls much less frequently
-        this.evaluate();
+        this.evaluate(); // TODO: Move this somewhere that calls much less frequently
       });
     };
 

@@ -2,24 +2,13 @@ import React, { useState, useContext, useEffect, Fragment } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 // inputs
-import { Button, FormControlLabel } from "@material-ui/core";
-import ComposedDatePicker from "./ComposedDatePicker.js";
 import TextField from "@material-ui/core/TextField";
-import Switch from "@material-ui/core/Switch";
 
-// components
-
-const useStyles = makeStyles(theme => ({
-  table: {}
-}));
-
-function EvaluatorCommentsTable(props) {
-  const classes = useStyles();
+function EvaluatorCommentsTable() {
   const value = useContext(CaseContext);
   const [comments, setComments] = useState(value.caseData.evaluatorComments);
 
@@ -53,6 +42,7 @@ function EvaluatorCommentsTable(props) {
       <Grid container justify="space-around" direction="column">
         <TextField
           id="comments-field"
+          label="Advice to client or notes about case"
           multiline
           value={comments}
           onChange={e => persist(e.target.value)}

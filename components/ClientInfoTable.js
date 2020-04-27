@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, Fragment } from "react";
 import { CaseContext } from "../contexts/casecontroller";
 
 // mui
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
@@ -12,16 +11,8 @@ import ComposedDatePicker from "./ComposedDatePicker.js";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 import NoteEditor from "./NoteEditor";
-import color from "@material-ui/core/colors/amber";
 
-// components
-
-const useStyles = makeStyles(theme => ({
-  table: {}
-}));
-
-function ClientInfoTable(props) {
-  const classes = useStyles();
+function ClientInfoTable() {
   const value = useContext(CaseContext);
   const [dob, setDob] = useState(value.caseData.client.dob);
   const [isOnProbation, setOnProbation] = useState(

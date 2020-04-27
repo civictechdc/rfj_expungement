@@ -1,13 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 // components
 import CaseTable from "./CaseTable.js";
 
 // mui
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   body: {
@@ -21,17 +19,13 @@ const useStyles = makeStyles(theme => ({
 function BodyView() {
   const classes = useStyles();
   return (
-    <Fragment>
-      <Container className={classes.body}>
-        <Grid container direction="column">
-          <CaseTable />
-        </Grid>
-        <div>
-          Produced with ❤️ in Washington DC by{" "}
-          <a href="https://codefordc.org/">Code For DC</a>
-        </div>
-      </Container>
-    </Fragment>
+    <Container className={classes.body}>
+      <CaseTable />
+      <div>
+        Produced with ❤️ in Washington DC by{" "}
+        <a href="https://codefordc.org/">Code For DC</a>
+      </div>
+    </Container>
   );
 }
 
