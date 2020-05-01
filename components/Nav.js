@@ -48,7 +48,7 @@ export default function NavBar() {
             return (
               <div style={{ display: "flex", flexGrow: 3, padding: "0 2vw" }}>
                 <Typography variant="h6" className={classes.title}>
-                  <p>{value.caseData.evaluatorName}</p>
+                  <p>Evaluator: {value.caseData.evaluatorName}</p>
                 </Typography>
 
                 <Typography
@@ -56,7 +56,7 @@ export default function NavBar() {
                   className={classes.status}
                   style={{ color: value.status.color }}
                 >
-                  <p>{value.status.text}</p>
+                  <p>Status: {value.status.text}</p>
                 </Typography>
               </div>
             );

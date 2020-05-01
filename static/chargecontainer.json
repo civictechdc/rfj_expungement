@@ -2,7 +2,7 @@
   "indicatorColor": "grey",
   "analysisMessage": "",
   "classification": "",
-  "dispositionDate": "",
+  "dispositionDate": null,
   "description": "",
   "isBRAFelony": false,
   "isConvicted": false,
