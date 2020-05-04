@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
+import React, { useContext } from "react";
+
+import { CaseContext } from "../contexts/casecontroller";
 
 // components
 import CaseTable from "./CaseTable.js";
 
 // mui
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   body: {
@@ -19,19 +19,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function BodyView() {
+  const value = useContext(CaseContext);
   const classes = useStyles();
   return (
-    <Fragment>
-      <Container className={classes.body}>
-        <Grid container direction="column">
-          <CaseTable />
-        </Grid>
-        <div>
-          Produced with ❤️ in Washington DC by{" "}
-          <a href="https://codefordc.org/">Code For DC</a>
-        </div>
-      </Container>
-    </Fragment>
+    <Container className={classes.body}>
+      <CaseTable caseData={value.caseData}/>
+      <div>
+        Produced with ❤️ in Washington DC by{" "}
+        <a href="https://codefordc.org/">Code For DC</a>
+      </div>
+    </Container>
   );
 }
 

@@ -1,34 +1,24 @@
-import React, { useState, useContext } from "react";
-import { CaseContext } from "../contexts/casecontroller";
+import React, { useState, useEffect } from "react";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import Grid from "@material-ui/core/Grid";
-
-// utils
-import getNestedObject from "../libs/get-nested";
-
-// mui
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(theme => ({
-  item: {}
-}));
 
 function ComposedDatePicker(props) {
-  const classes = useStyles();
-  const [dateState, setDateState] = useState(
-    props.initialDate ? props.initialDate : new Date()
-  );
+  const [dateState, setDateState] = useState(props.initialDate);
 
   const handleDateChange = date => {
     setDateState(date);
-    props.hoist(date);
+    if ("hoist" in props) {
+      props.hoist(date);
+    }
   };
+
+  useEffect(() => {
+    setDateState(props.initialDate);
+  }, [props]);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

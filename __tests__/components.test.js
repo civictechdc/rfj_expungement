@@ -1,3 +1,4 @@
+import React from "react";
 import { shallow } from "enzyme";
 import BodyView from "../components/BodyView";
 import CaseRow from "../components/CaseRow";

@@ -1,6 +1,15 @@
-import React, { useState, useContext, useEffect, Fragment, useRef } from "react";
-import { CaseContext } from "../contexts/casecontroller";
+import React, { useState } from "react";
 
+import chargeContainer from "../static/chargecontainer.json";
+import getAnalysis from "../libs/evaluator";
+
+// components
+import ComposedDatePicker from "./ComposedDatePicker.js";
+import Indicator from "./Indicator";
+
+// mui
+import { FormControlLabel } from "@material-ui/core";
+import Switch from "@material-ui/core/Switch";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
@@ -8,121 +17,58 @@ import CardHeader from "@material-ui/core/CardHeader";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
-import AlbumRoundedIcon from "@material-ui/icons/AlbumRounded";
 import TextField from "@material-ui/core/TextField";
-import ComposedDatePicker from "./ComposedDatePicker.js";
-import { Button, FormControlLabel } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Switch from "@material-ui/core/Switch";
-import MenuItem from "@material-ui/core/MenuItem";
 
-const CaseRow = props => {
-  const [showForm, setShowForm] = useState(false);
-  const value = useContext(CaseContext);
-  let timerRef = useRef( null );
-  let TIMEOUT_DURATION = 1000;
+function CaseRow(props) {
+  const [showForm, setShowForm] = useState(false); // default to collapsed
 
   // Charge properties
-  const chargeObj = value.caseData.case.charges[props.charge];
-  const [chargeDescription, setChargeDescription] = useState(
-    chargeObj.description
+  const [description, setDescription] = useState(chargeContainer.description);
+  const [classification, setClassification] = useState(
+    chargeContainer.classification
   );
-  const [chargeClassification, setChargeClassification] = useState(
-    chargeObj.classification
-  );
-  const [chargeIsBRAFelony, setIsBRAFelony] = useState(chargeObj.isBRAFelony);
-  const [chargeIsConvicted, setChargeIsConvicted] = useState(
-    chargeObj.isConvicted
-  );
-  const [chargeIsPapered, setChargeIsPapered] = useState(chargeObj.isPapered);
-  const [chargeOffense, setChargeOffense] = useState(chargeObj.offense);
+  const [isBRAFelony, setIsBRAFelony] = useState(chargeContainer.isBRAFelony);
+  const [convicted, setConvicted] = useState(chargeContainer.isConvicted);
+  const [papered, setPapered] = useState(chargeContainer.isPapered);
+  const [offense, setOffense] = useState(chargeContainer.offense);
   const [chargeDispositionDate, setChargeDispositionDate] = useState(
-    chargeObj.dispositionDate
+    chargeContainer.dispositionDate
   );
 
-  const handleExpandClick = () => {
-    setShowForm(!showForm);
-  };
-
-  useEffect(() => {
-    timerRef.current = setTimeout(()=>{
-      value.updater({
-        caseData: {
-          ...value.caseData,
-          case: {
-            ...value.caseData.case,
-            charges: {
-              ...value.caseData.case.charges,
-              [props.charge]: {
-                description: chargeDescription,
-                classification: chargeClassification,
-                isBRAFelony: chargeIsBRAFelony,
-                isConvicted: chargeIsConvicted,
-                isPapered: chargeIsPapered,
-                dispositionDate: chargeDispositionDate,
-                offense: chargeOffense
-              }
-            }
-          }
-        }
-      });  
-    }, TIMEOUT_DURATION)
-    
-  }, [
-    chargeDescription,
-    chargeClassification,
-    chargeIsBRAFelony,
-    chargeIsConvicted,
-    chargeIsPapered,
-    chargeOffense,
-    chargeDispositionDate
-  ]);
-
-  const renderIndicator = () => {
-    let chargeData = value.caseData.case.charges[props.charge];
-    if (chargeData.hasOwnProperty("analysis")) {
-      console.log("Found an analysis for this charge!");
-      switch (chargeData.analysis.indicator) {
-        case "ELIGIBLE":
-          return "blue";
-        case "INELIGIBLE":
-          return "red";
-        default:
-          return "grey";
-      }
-    }
-  };
-
-  const renderAnalysisMessage = () => {
-    let chargeData = value.caseData.case.charges[props.charge];
-    if (chargeData.hasOwnProperty("analysis")) {
-      return <Typography>{chargeData.analysis.message}</Typography>;
-    }
-  };
+  function analysis() {
+    return getAnalysis(
+      convicted,
+      props.terminationDate,
+      classification,
+      isBRAFelony,
+      papered
+    );
+  }
 
   return (
     <Card>
       <CardHeader
         title={props.charge}
         action={
-          <Fragment>
-            <AlbumRoundedIcon htmlColor={renderIndicator()} />
-            <IconButton aria-label="Show form" onClick={handleExpandClick}>
-              <ExpandMoreIcon />
-            </IconButton>
-          </Fragment>
+          <IconButton
+            aria-label="Show form"
+            onClick={() => setShowForm(!showForm)}
+          >
+            <ExpandMoreIcon />
+          </IconButton>
         }
       />
       <Collapse in={showForm} timeout="auto" unmountOnExit>
         <CardContent>
-          {renderAnalysisMessage()}
-          <Grid container justify="space-around" direction="column">
+          <Indicator analysis={analysis()} />
+
+          <Grid container direction="column">
             <TextField
               id="offense-field"
               autoComplete="off"
               label="Offense"
-              value={chargeOffense}
-              onChange={e => setChargeOffense(e.target.value)}
+              value={offense}
+              onChange={e => setOffense(e.target.value)}
               margin="normal"
             />
             <ComposedDatePicker
@@ -136,18 +82,16 @@ const CaseRow = props => {
               select
               autoComplete="off"
               label="Classification"
-              value={chargeClassification}
-              SelectProps={{
-                native: true
-              }}
-              onChange={e => setChargeClassification(e.target.value)}
+              value={classification}
+              SelectProps={{ native: true }}
+              onChange={e => setClassification(e.target.value)}
               margin="normal"
             >
-              <option key="" value="Select Classification"></option>
-              <option key="1" value="Felony">
+              <option key="" value=""></option>
+              <option key="1" value="felony">
                 Felony
               </option>
-              <option key="2" value="Misdemeanor">
+              <option key="2" value="misdemeanor">
                 Misdemeanor
               </option>
             </TextField>
@@ -155,17 +99,17 @@ const CaseRow = props => {
               id="description-field"
               autoComplete="off"
               label="Description"
-              value={chargeDescription}
-              onChange={e => setChargeDescription(e.target.value)}
+              value={description}
+              onChange={e => setDescription(e.target.value)}
               margin="normal"
             />
             <FormControlLabel
               control={
                 <Switch
-                  checked={chargeIsPapered}
-                  onChange={e => setChargeIsPapered(e.target.checked)}
-                  value="ChargeIsPapered"
-                  inputProps={{ "aria-label": "ChargeIsPapered checkbox" }}
+                  checked={papered}
+                  onChange={e => setPapered(e.target.checked)}
+                  value="Papered"
+                  inputProps={{ "aria-label": "Papered checkbox" }}
                 />
               }
               label="Is Papered"
@@ -173,7 +117,7 @@ const CaseRow = props => {
             <FormControlLabel
               control={
                 <Switch
-                  checked={chargeIsBRAFelony}
+                  checked={isBRAFelony}
                   onChange={e => setIsBRAFelony(e.target.checked)}
                   value="ChargeIsBRAFelony"
                   inputProps={{ "aria-label": "ChargeIsBRAFelony checkbox" }}
@@ -184,10 +128,10 @@ const CaseRow = props => {
             <FormControlLabel
               control={
                 <Switch
-                  checked={chargeIsConvicted}
-                  onChange={e => setChargeIsConvicted(e.target.checked)}
-                  value="ChargeIsConvicted"
-                  inputProps={{ "aria-label": "ChargeIsConvicted checkbox" }}
+                  checked={convicted}
+                  onChange={e => setConvicted(e.target.checked)}
+                  value="Convicted"
+                  inputProps={{ "aria-label": "Convicted checkbox" }}
                 />
               }
               label="Is Convicted"
@@ -197,6 +141,6 @@ const CaseRow = props => {
       </Collapse>
     </Card>
   );
-};
+}
 
 export default CaseRow;
