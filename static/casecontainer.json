@@ -2,7 +2,7 @@
   "evaluatorName": "",
   "evaluatorComments": "",
   "client": {
-    "dob": "",
+    "dob": null,
     "isOnProbation": false,
     "name": "",
     "pdId": ""
@@ -10,7 +10,7 @@
   "case": {
     "id": "",
     "isConvicted": false,
-    "terminationDate": "",
+    "terminationDate": null,
     "charges": {}
   }
 }

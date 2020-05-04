@@ -48,18 +48,6 @@ class InitializedProvider extends React.Component {
       });
     };
 
-    this.pushCharge = () => {
-      let chargeNum = Object.keys(this.state.caseData.case.charges).length + 1;
-      let oldState = this.state.caseData.case.charges;
-      let newState = this.state.caseData.case.charges;
-      newState[`Charge ${chargeNum}`] = this.state.chargeFormat;
-      this.setState({ oldState, newState });
-
-      this.setState((state, props) => ({
-        counter: state.counter + props.increment
-      }));
-    };
-
     // General purpose updater -- pass an object get a state update
     this.updater = stateobj => {
       this.setState(stateobj, () => {
@@ -69,7 +57,6 @@ class InitializedProvider extends React.Component {
 
     this.state = {
       ...caseObj,
-      pushCharge: this.pushCharge,
       reset: this.reset,
       updater: this.updater
     };

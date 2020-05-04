@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -7,7 +7,7 @@ import {
 } from "@material-ui/pickers";
 
 function ComposedDatePicker(props) {
-  const [dateState, setDateState] = useState(null);
+  const [dateState, setDateState] = useState(props.initialDate);
 
   const handleDateChange = date => {
     setDateState(date);
@@ -15,6 +15,10 @@ function ComposedDatePicker(props) {
       props.hoist(date);
     }
   };
+
+  useEffect(() => {
+    setDateState(props.initialDate);
+  }, [props]);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
