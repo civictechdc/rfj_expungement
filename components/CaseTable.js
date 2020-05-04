@@ -13,6 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import { FormControlLabel } from "@material-ui/core";
 import ComposedDatePicker from "./ComposedDatePicker.js";
 import Switch from "@material-ui/core/Switch";
+import Button from "@material-ui/core/Button";
 
 // components
 import CaseRow from "./CaseRow";
@@ -55,18 +56,21 @@ function CaseTable(props) {
   };
 
   const persistEvaluatorName = name => {
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        evaluatorName: name,
-        case: {
-          ...value.caseData.case
-        },
-        client: {
-          ...value.caseData.client
-        }
-      }
-    });
+    setEvaluatorName(name);
+    value.caseData.evaluatorName = name;
+    value.updater({caseData : value.caseData});
+  };
+
+  const persistEvaluatorComments = comments => {
+    setComments(comments);
+    value.caseData.evaluatorComments = comments;
+    value.updater({caseData : value.caseData});
+  };
+
+  const persistTerminationDate = terminationDate => {
+    setTerminationDate(terminationDate);
+    value.caseData.case.terminationDate = terminationDate;
+    value.updater({caseData : value.caseData});
   };
 
   const persist = (newChargeKey, newCharge) => {
@@ -104,7 +108,6 @@ function CaseTable(props) {
           label="Evaluator Name"
           value={evaluatorName}
           onChange={e => {
-            setEvaluatorName(e.target.value);
             persistEvaluatorName(e.target.value);
           }}
         />
@@ -113,7 +116,7 @@ function CaseTable(props) {
           multiline
           value={comments}
           onChange={e => {
-            setComments(e.target.value);
+            persistEvaluatorComments(e.target.value);
           }}
         />
         <TextField
@@ -154,7 +157,7 @@ function CaseTable(props) {
         <ComposedDatePicker
           label={"Case Terminated On"}
           hoist={e => {
-            setTerminationDate(e);
+            persistTerminationDate(e);
           }}
           initialDate={terminationDate}
         />
