@@ -52,8 +52,8 @@ class InitializedProvider extends React.Component {
       return y + 3;
     };
 
-    this.saveDataToPDF = (caseData) => {
-      console.log('save to pdf',caseData);
+    this.saveDataToPDF = () => {
+      console.log('save to pdf',this.state.caseData);
       const jsPDF = require("jspdf");
       const pdf = new jsPDF();
       pdf.setFontSize(5);
@@ -63,34 +63,34 @@ class InitializedProvider extends React.Component {
       y = this.nextPdfLine(y);
       pdf.text("Evaluator Name", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.evaluatorName, x, y);
+      pdf.text(this.state.caseData.evaluatorName, x, y);
       y = this.nextPdfLine(y);
       pdf.text("Evaluator Comments", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.evaluatorComments, x, y);
+      pdf.text(this.state.caseData.evaluatorComments, x, y);
       y = this.nextPdfLine(y);
       pdf.text("Client Name", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.client.name, x, y);
+      pdf.text(this.state.caseData.client.name, x, y);
       y = this.nextPdfLine(y);
       pdf.text("Client Is On Probation", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.client.isOnProbation + "", x, y);
+      pdf.text(this.state.caseData.client.isOnProbation + "", x, y);
       y = this.nextPdfLine(y);
       pdf.text("Client PD ID", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.client.pdId, x, y);
+      pdf.text(this.state.caseData.client.pdId, x, y);
       y = this.nextPdfLine(y);
       pdf.text("Client Date Of Birth", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.client.dob + "", x, y);
+      pdf.text(this.state.caseData.client.dob + "", x, y);
       y = this.nextPdfLine(y);
       pdf.text("Client Case Termination Date", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(caseData.case.terminationDate + "", x, y);
+      pdf.text(this.state.caseData.case.terminationDate + "", x, y);
       y = this.nextPdfLine(y);
 
-      let charges = caseData.case.charges;
+      let charges = this.state.caseData.case.charges;
       let values = Object.values(charges);
       for(let chargeNum=0;chargeNum<values.length;chargeNum=chargeNum+1){
         let charge = values[chargeNum];

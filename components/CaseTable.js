@@ -50,9 +50,8 @@ function CaseTable(props) {
   const pushCharge = () => {
     let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
     let newChargeKey = `Charge ${chargeNum}`;
-    persist(newChargeKey, value.chargeFormat);
-    // save all data, including new charge,
-    // to update display without changing original json caseContainer
+    value.caseData.case.charges[newChargeKey] = value.chargeFormat;
+    value.updater({caseData : value.caseData});
   };
 
   const persistEvaluatorName = name => {
@@ -73,30 +72,29 @@ function CaseTable(props) {
     value.updater({caseData : value.caseData});
   };
 
-  const persist = (newChargeKey, newCharge) => {
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        evaluatorName: evaluatorName,
-        evaluatorComments: comments,
-        case: {
-          ...value.caseData.case,
-          charges: {
-            ...value.caseData.case.charges,
-            [newChargeKey]: newCharge
-          },
-          terminationDate: terminationDate
-        },
-        client: {
-          ...value.caseData.client,
-          dob: birthDate,
-          isOnProbation: isOnProbation,
-          name: clientName,
-          pdId: pdId
-        }
-      }
-    });
-  };
+  const persistClientName = clientName => {
+    setClientName(clientName);
+    value.caseData.client.name = clientName;
+    value.updater({caseData : value.caseData});
+  }
+
+  const persistOnProbation = isOnProbation => {
+    setOnProbation(isOnProbation);
+    value.caseData.client.isOnProbation = isOnProbation;
+    value.updater({caseData : value.caseData});
+  }
+
+  const persistPdId = pdId => {
+    setPdId(pdId);
+    value.caseData.client.pdId = pdId;
+    value.updater({caseData : value.caseData});
+  }
+
+  const persistBirthDate = dob => {
+    setBirthDate(dob);
+    value.caseData.client.dob = dob;
+    value.updater({caseData : value.caseData});
+  }
 
   return (
     <Card>
@@ -124,7 +122,7 @@ function CaseTable(props) {
           autoComplete="off"
           value={clientName}
           onChange={e => {
-            setClientName(e.target.value);
+            persistClientName(e.target.value);
           }}
         />
         <FormControlLabel
@@ -132,7 +130,7 @@ function CaseTable(props) {
             <Switch
               checked={isOnProbation}
               onChange={e => {
-                setOnProbation(e.target.checked);
+                persistOnProbation(e.target.checked);
               }}
               inputProps={{ "aria-label": "isOnProbation checkbox" }}
             />
@@ -144,13 +142,13 @@ function CaseTable(props) {
           autoComplete="off"
           value={pdId}
           onChange={e => {
-            setPdId(e.target.value);
+            persistPdId(e.target.value);
           }}
         />
         <ComposedDatePicker
           label={"Client DOB"}
           hoist={e => {
-            setBirthDate(e);
+            persistBirthDate(e);
           }}
           initialDate={birthDate}
         />
@@ -165,12 +163,11 @@ function CaseTable(props) {
 
       {/* Cases in Context object */}
       <div>
-        {Object.keys(charges).map((charge, idx) => {
+        {Object.keys(charges).map((chargeKey, idx) => {
           return (
             <CaseRow
-              charge={charge}
+              title={chargeKey}
               terminationDate={terminationDate}
-              key={`${idx}-charge`}
             />
           );
         })}
