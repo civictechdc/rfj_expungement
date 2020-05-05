@@ -50,50 +50,75 @@ function CaseTable(props) {
   const pushCharge = () => {
     let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
     let newChargeKey = `Charge ${chargeNum}`;
-    value.caseData.case.charges[newChargeKey] = value.chargeFormat;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.case.charges[newChargeKey] = value.chargeFormat;
+    value.updater(update);
   };
 
   const persistEvaluatorName = name => {
     setEvaluatorName(name);
-    value.caseData.evaluatorName = name;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.evaluatorName = name;
+    value.updater(update);
   };
 
   const persistEvaluatorComments = comments => {
     setComments(comments);
-    value.caseData.evaluatorComments = comments;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.evaluatorComments = comments;
+    value.updater(update);
   };
 
   const persistTerminationDate = terminationDate => {
     setTerminationDate(terminationDate);
-    value.caseData.case.terminationDate = terminationDate;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.case.terminationDate = terminationDate;
+    value.updater(update);
   };
 
   const persistClientName = clientName => {
     setClientName(clientName);
-    value.caseData.client.name = clientName;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.client.name = clientName;
+    value.updater(update);
   }
 
   const persistOnProbation = isOnProbation => {
     setOnProbation(isOnProbation);
-    value.caseData.client.isOnProbation = isOnProbation;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.client.isOnProbation = isOnProbation;
+    value.updater(update);
   }
 
   const persistPdId = pdId => {
     setPdId(pdId);
-    value.caseData.client.pdId = pdId;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.client.pdId = pdId;
+    value.updater(update);
+  }
+
+  const getUpdater = () => {
+    return {
+      caseData: {
+        ...value.caseData,
+        case: {
+          ...value.caseData.case,
+          charges: {
+            ...value.caseData.case.charges,
+          },
+        },
+        client: {
+          ...value.caseData.client,
+        }
+      }
+    };
   }
 
   const persistBirthDate = dob => {
     setBirthDate(dob);
-    value.caseData.client.dob = dob;
-    value.updater({caseData : value.caseData});
+    let update = getUpdater();
+    update.caseData.client.dob = dob;
+    value.updater(update);
   }
 
   return (
@@ -168,6 +193,7 @@ function CaseTable(props) {
             <CaseRow
               title={chargeKey}
               terminationDate={terminationDate}
+              charges={value.caseData.case.charges}
             />
           );
         })}
