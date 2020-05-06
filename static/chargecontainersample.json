@@ -1,0 +1,11 @@
+{
+  "indicatorColor": "grey",
+  "analysisMessage": "",
+  "classification": "Felony",
+  "dispositionDate": "04/09/2010",
+  "description": "sample description",
+  "isBRAFelony": true,
+  "isConvicted": true,
+  "isPapered": true,
+  "offense": "sample offense"    
+}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { CaseContext } from "../contexts/casecontroller";
 
-import chargeContainer from "../static/chargecontainer.json";
 import getAnalysis from "../libs/evaluator";
 
 // components
@@ -20,20 +20,108 @@ import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 
 function CaseRow(props) {
-  const [showForm, setShowForm] = useState(false); // default to collapsed
+  const value = useContext(CaseContext);
+  let charge = props.charges[props.title] || {};
+  const [showForm, setShowForm] = useState(true);
 
   // Charge properties
-  const [description, setDescription] = useState(chargeContainer.description);
+  const [description, setDescription] = useState(charge.description);
   const [classification, setClassification] = useState(
-    chargeContainer.classification
+    charge.classification
   );
-  const [isBRAFelony, setIsBRAFelony] = useState(chargeContainer.isBRAFelony);
-  const [convicted, setConvicted] = useState(chargeContainer.isConvicted);
-  const [papered, setPapered] = useState(chargeContainer.isPapered);
-  const [offense, setOffense] = useState(chargeContainer.offense);
-  const [chargeDispositionDate, setChargeDispositionDate] = useState(
-    chargeContainer.dispositionDate
+  const [isBRAFelony, setIsBRAFelony] = useState(charge.isBRAFelony);
+  const [convicted, setConvicted] = useState(charge.isConvicted);
+  const [papered, setPapered] = useState(charge.isPapered);
+  const [offense, setOffense] = useState(charge.offense);
+  const [dispositionDate, setDispositionDate] = useState(
+    charge.dispositionDate
   );
+
+  useEffect(() => {
+    if(props.charges && props.charges[props.title]){
+      setDescription(props.charges[props.title].description);
+      setClassification(props.charges[props.title].classification);
+      setIsBRAFelony(props.charges[props.title].isBRAFelony);
+      setConvicted(props.charges[props.title].isConvicted);
+      setPapered(props.charges[props.title].isPapered);
+      setOffense(props.charges[props.title].offense);
+      setDispositionDate(props.charges[props.title].dispositionDate);  
+    }
+  }, [props]);
+
+  const getUpdater = () => {
+    return {
+      caseData: {
+        ...value.caseData,
+        case: {
+          ...value.caseData.case,
+          charges: {
+            ...value.caseData.case.charges,
+          },
+        },
+        client: {
+          ...value.caseData.client,
+        }
+      }
+    };
+  }
+
+
+  const persistClassification = classification => {
+    setClassification(classification);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.classification = classification;
+    value.updater(update);
+  }
+
+  const persistDescription = description => {
+    setDescription(description);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.description = description;
+    value.updater(update);
+  }
+
+  const persistIsBRAFelony = isBRAFelony => {
+    setIsBRAFelony(isBRAFelony);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.isBRAFelony = isBRAFelony;
+    value.updater(update);
+  }
+
+  const persistConvicted = isConvicted => {
+    setConvicted(isConvicted);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.isConvicted = isConvicted;
+    value.updater(update);
+  }
+
+  const persistPapered = isPapered => {
+    setPapered(isPapered);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.isPapered = isPapered;
+    value.updater(update);
+  }
+
+  const persistOffense = offense => {
+    setOffense(offense);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.offense = offense;
+    value.updater(update);
+  }
+
+  const persistDispositionDate = dispositionDate => {
+    setDispositionDate(dispositionDate);
+    let update = getUpdater();
+    let updateCharge = update.caseData.case.charges[props.title];
+    updateCharge.dispositionDate = dispositionDate;
+    value.updater(update);
+  }
 
   function analysis() {
     return getAnalysis(
@@ -48,7 +136,7 @@ function CaseRow(props) {
   return (
     <Card>
       <CardHeader
-        title={props.charge}
+        title={props.title}
         action={
           <IconButton
             aria-label="Show form"
@@ -68,14 +156,14 @@ function CaseRow(props) {
               autoComplete="off"
               label="Offense"
               value={offense}
-              onChange={e => setOffense(e.target.value)}
+              onChange={e => persistOffense(e.target.value)}
               margin="normal"
             />
             <ComposedDatePicker
-              ctxKeys={["caseData", "case", "charges", props.charge]}
+              ctxKeys={["caseData", "case", "charges", charge]}
               label={"Disposition Date"}
-              initialDate={chargeDispositionDate}
-              hoist={e => setChargeDispositionDate(e)}
+              initialDate={dispositionDate}
+              hoist={e => persistDispositionDate(e)}
             />
             <TextField
               id="classification-field"
@@ -84,7 +172,7 @@ function CaseRow(props) {
               label="Classification"
               value={classification}
               SelectProps={{ native: true }}
-              onChange={e => setClassification(e.target.value)}
+              onChange={e => persistClassification(e.target.value)}
               margin="normal"
             >
               <option key="" value=""></option>
@@ -100,14 +188,14 @@ function CaseRow(props) {
               autoComplete="off"
               label="Description"
               value={description}
-              onChange={e => setDescription(e.target.value)}
+              onChange={e => persistDescription(e.target.value)}
               margin="normal"
             />
             <FormControlLabel
               control={
                 <Switch
                   checked={papered}
-                  onChange={e => setPapered(e.target.checked)}
+                  onChange={e => persistPapered(e.target.checked)}
                   value="Papered"
                   inputProps={{ "aria-label": "Papered checkbox" }}
                 />
@@ -118,7 +206,7 @@ function CaseRow(props) {
               control={
                 <Switch
                   checked={isBRAFelony}
-                  onChange={e => setIsBRAFelony(e.target.checked)}
+                  onChange={e => persistIsBRAFelony(e.target.checked)}
                   value="ChargeIsBRAFelony"
                   inputProps={{ "aria-label": "ChargeIsBRAFelony checkbox" }}
                 />
@@ -129,7 +217,7 @@ function CaseRow(props) {
               control={
                 <Switch
                   checked={convicted}
-                  onChange={e => setConvicted(e.target.checked)}
+                  onChange={e => persistConvicted(e.target.checked)}
                   value="Convicted"
                   inputProps={{ "aria-label": "Convicted checkbox" }}
                 />

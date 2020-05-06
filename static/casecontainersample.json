@@ -1,0 +1,26 @@
+{
+  "evaluatorName": "sample name",
+  "evaluatorComments": "sample comments",
+  "client": {
+    "dob": "02/04/1990",
+    "isOnProbation": true,
+    "name": "sample client",
+    "pdId": "sample client pdid"
+  },
+  "case": {
+    "id": "sample case id",
+    "isConvicted": true,
+    "terminationDate": "03/12/2005",
+    "charges": {
+      "Charge 01" : {
+        "classification": "felony",
+        "dispositionDate": "04/09/2010",
+        "description": "sample description",
+        "isBRAFelony": true,
+        "isConvicted": true,
+        "isPapered": true,
+        "offense": "sample offense"      
+      }
+    }
+  }
+}

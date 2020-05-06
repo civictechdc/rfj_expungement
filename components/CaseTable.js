@@ -13,6 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import { FormControlLabel } from "@material-ui/core";
 import ComposedDatePicker from "./ComposedDatePicker.js";
 import Switch from "@material-ui/core/Switch";
+import Button from "@material-ui/core/Button";
 
 // components
 import CaseRow from "./CaseRow";
@@ -49,50 +50,76 @@ function CaseTable(props) {
   const pushCharge = () => {
     let chargeNum = Object.keys(value.caseData.case.charges).length + 1;
     let newChargeKey = `Charge ${chargeNum}`;
-    persist(newChargeKey, value.chargeFormat);
-    // save all data, including new charge,
-    // to update display without changing original json caseContainer
+    let update = getUpdater();
+    update.caseData.case.charges[newChargeKey] = value.chargeFormat;
+    value.updater(update);
   };
 
   const persistEvaluatorName = name => {
-    value.updater({
-      caseData: {
-        ...value.caseData,
-        evaluatorName: name,
-        case: {
-          ...value.caseData.case
-        },
-        client: {
-          ...value.caseData.client
-        }
-      }
-    });
+    setEvaluatorName(name);
+    let update = getUpdater();
+    update.caseData.evaluatorName = name;
+    value.updater(update);
   };
 
-  const persist = (newChargeKey, newCharge) => {
-    value.updater({
+  const persistEvaluatorComments = comments => {
+    setComments(comments);
+    let update = getUpdater();
+    update.caseData.evaluatorComments = comments;
+    value.updater(update);
+  };
+
+  const persistTerminationDate = terminationDate => {
+    setTerminationDate(terminationDate);
+    let update = getUpdater();
+    update.caseData.case.terminationDate = terminationDate;
+    value.updater(update);
+  };
+
+  const persistClientName = clientName => {
+    setClientName(clientName);
+    let update = getUpdater();
+    update.caseData.client.name = clientName;
+    value.updater(update);
+  }
+
+  const persistOnProbation = isOnProbation => {
+    setOnProbation(isOnProbation);
+    let update = getUpdater();
+    update.caseData.client.isOnProbation = isOnProbation;
+    value.updater(update);
+  }
+
+  const persistPdId = pdId => {
+    setPdId(pdId);
+    let update = getUpdater();
+    update.caseData.client.pdId = pdId;
+    value.updater(update);
+  }
+
+  const getUpdater = () => {
+    return {
       caseData: {
         ...value.caseData,
-        evaluatorName: evaluatorName,
-        evaluatorComments: comments,
         case: {
           ...value.caseData.case,
           charges: {
             ...value.caseData.case.charges,
-            [newChargeKey]: newCharge
           },
-          terminationDate: terminationDate
         },
         client: {
           ...value.caseData.client,
-          dob: birthDate,
-          isOnProbation: isOnProbation,
-          name: clientName,
-          pdId: pdId
         }
       }
-    });
-  };
+    };
+  }
+
+  const persistBirthDate = dob => {
+    setBirthDate(dob);
+    let update = getUpdater();
+    update.caseData.client.dob = dob;
+    value.updater(update);
+  }
 
   return (
     <Card>
@@ -104,7 +131,6 @@ function CaseTable(props) {
           label="Evaluator Name"
           value={evaluatorName}
           onChange={e => {
-            setEvaluatorName(e.target.value);
             persistEvaluatorName(e.target.value);
           }}
         />
@@ -113,7 +139,7 @@ function CaseTable(props) {
           multiline
           value={comments}
           onChange={e => {
-            setComments(e.target.value);
+            persistEvaluatorComments(e.target.value);
           }}
         />
         <TextField
@@ -121,7 +147,7 @@ function CaseTable(props) {
           autoComplete="off"
           value={clientName}
           onChange={e => {
-            setClientName(e.target.value);
+            persistClientName(e.target.value);
           }}
         />
         <FormControlLabel
@@ -129,7 +155,7 @@ function CaseTable(props) {
             <Switch
               checked={isOnProbation}
               onChange={e => {
-                setOnProbation(e.target.checked);
+                persistOnProbation(e.target.checked);
               }}
               inputProps={{ "aria-label": "isOnProbation checkbox" }}
             />
@@ -141,20 +167,20 @@ function CaseTable(props) {
           autoComplete="off"
           value={pdId}
           onChange={e => {
-            setPdId(e.target.value);
+            persistPdId(e.target.value);
           }}
         />
         <ComposedDatePicker
           label={"Client DOB"}
           hoist={e => {
-            setBirthDate(e);
+            persistBirthDate(e);
           }}
           initialDate={birthDate}
         />
         <ComposedDatePicker
           label={"Case Terminated On"}
           hoist={e => {
-            setTerminationDate(e);
+            persistTerminationDate(e);
           }}
           initialDate={terminationDate}
         />
@@ -162,12 +188,12 @@ function CaseTable(props) {
 
       {/* Cases in Context object */}
       <div>
-        {Object.keys(charges).map((charge, idx) => {
+        {Object.keys(charges).map((chargeKey, idx) => {
           return (
             <CaseRow
-              charge={charge}
+              title={chargeKey}
               terminationDate={terminationDate}
-              key={`${idx}-charge`}
+              charges={value.caseData.case.charges}
             />
           );
         })}
