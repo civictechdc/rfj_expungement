@@ -52,79 +52,62 @@ class InitializedProvider extends React.Component {
       return y + 3;
     };
 
+    this.keyValue = (pdf,key,value,x1,x2,y) => {
+      pdf.text(key, x1, y);
+      pdf.text(value, x2, y);
+    }
+
     this.saveDataToPDF = () => {
       console.log('save to pdf',this.state.caseData);
       const jsPDF = require("jspdf");
       const pdf = new jsPDF();
-      pdf.setFontSize(5);
+      pdf.setFontSize(8);
       // when adding new controller code, it needs to be added to this.state = ...
       let x = 10;
       let y = 0;
+      let xColumn2 = 50;
       y = this.nextPdfLine(y);
-      pdf.text("Evaluator Name", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.evaluatorName, x, y);
       y = this.nextPdfLine(y);
-      pdf.text("Evaluator Comments", x, y);
+      this.keyValue(pdf,"Evaluator Name",this.state.caseData.evaluatorName,x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.evaluatorComments, x, y);
+      this.keyValue(pdf,"Evaluator Comments",this.state.caseData.evaluatorComments,x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text("Client Name", x, y);
+      this.keyValue(pdf,"Client Name",this.state.caseData.client.name,x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.client.name, x, y);
+      this.keyValue(pdf,"Client Is On Probation",this.state.caseData.client.isOnProbation+"",x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text("Client Is On Probation", x, y);
+      this.keyValue(pdf,"Client PD ID",this.state.caseData.client.pdId,x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.client.isOnProbation + "", x, y);
+      this.keyValue(pdf,"Client Date Of Birth",this.state.caseData.client.dob+"",x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text("Client PD ID", x, y);
+      this.keyValue(pdf,"Client Case Termination Date",this.state.caseData.case.terminationDate+"",x,xColumn2,y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.client.pdId, x, y);
       y = this.nextPdfLine(y);
-      pdf.text("Client Date Of Birth", x, y);
       y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.client.dob + "", x, y);
-      y = this.nextPdfLine(y);
-      pdf.text("Client Case Termination Date", x, y);
-      y = this.nextPdfLine(y);
-      pdf.text(this.state.caseData.case.terminationDate + "", x, y);
       y = this.nextPdfLine(y);
 
       let charges = this.state.caseData.case.charges;
-      let values = Object.values(charges);
-      for(let chargeNum=0;chargeNum<values.length;chargeNum=chargeNum+1){
-        let charge = values[chargeNum];
-        pdf.text("Charge "+chargeNum, x, y);
+      Object.keys(charges).map(key => {
+        let charge = charges[key];
+        this.keyValue(pdf,"Charge",key,x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text("Offense", x, y);
+        this.keyValue(pdf,"Offense",charge.offense,x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text(charge.offense + "", x, y);
+        this.keyValue(pdf,"Disposition Date",charge.dispositionDate+"",x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text("Disposition Date", x, y);
+        this.keyValue(pdf,"Classification",charge.classification+"",x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text(charge.dispositionDate + "", x, y);
+        this.keyValue(pdf,"Description",charge.description+"",x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text("Classification", x, y);
+        this.keyValue(pdf,"Is Papered",charge.isPapered+"",x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text(charge.classification + "", x, y);
+        this.keyValue(pdf,"Is BRA Felony",charge.isBRAFelony+"",x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text("Description", x, y);
+        this.keyValue(pdf,"Is Convicted",charge.isConvicted+"",x,xColumn2,y);
         y = this.nextPdfLine(y);
-        pdf.text(charge.description + "", x, y);
         y = this.nextPdfLine(y);
-        pdf.text("Is Papered", x, y);
-        y = this.nextPdfLine(y);
-        pdf.text(charge.isPapered + "", x, y);
-        y = this.nextPdfLine(y);
-        pdf.text("Is BRA Felony", x, y);
-        y = this.nextPdfLine(y);
-        pdf.text(charge.isBRAFelony + "", x, y);
-        y = this.nextPdfLine(y);
-        pdf.text("Is Convicted", x, y);
-        y = this.nextPdfLine(y);
-        pdf.text(charge.isConvicted + "", x, y);
-        y = this.nextPdfLine(y);
-      }
+      })
       pdf.save("data.pdf");
     };
 
