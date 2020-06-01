@@ -7,6 +7,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
 // inputs
 import TextField from "@material-ui/core/TextField";
@@ -17,8 +18,16 @@ import Switch from "@material-ui/core/Switch";
 // components
 import CaseRow from "./CaseRow";
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(3)
+  }
+}));
+
 function CaseTable(props) {
   const value = useContext(CaseContext);
+
+  const classes = useStyles();
 
   const [evaluatorName, setEvaluatorName] = useState(
     value.caseData.evaluatorName
@@ -95,13 +104,18 @@ function CaseTable(props) {
   };
 
   return (
-    <Card>
+    <Card className={classes.root}>
       <CardHeader
-        title={<Typography variant="h4">Case Info:</Typography>}
+        title={
+          <Typography variant="h4" align="center" gutterBottom>
+            Case Info
+          </Typography>
+        }
       ></CardHeader>
       <Grid container direction="column">
         <TextField
           label="Evaluator Name"
+          margin="normal"
           value={evaluatorName}
           onChange={e => {
             setEvaluatorName(e.target.value);
@@ -110,6 +124,7 @@ function CaseTable(props) {
         />
         <TextField
           label="Advice to client or notes about case"
+          margin="normal"
           multiline
           value={comments}
           onChange={e => {
@@ -118,6 +133,7 @@ function CaseTable(props) {
         />
         <TextField
           label="Client Name"
+          margin="normal"
           autoComplete="off"
           value={clientName}
           onChange={e => {
@@ -125,6 +141,7 @@ function CaseTable(props) {
           }}
         />
         <FormControlLabel
+          margin="normal"
           control={
             <Switch
               checked={isOnProbation}
@@ -138,6 +155,7 @@ function CaseTable(props) {
         ></FormControlLabel>
         <TextField
           label="Client PD ID"
+          margin="normal"
           autoComplete="off"
           value={pdId}
           onChange={e => {
@@ -146,6 +164,7 @@ function CaseTable(props) {
         />
         <ComposedDatePicker
           label={"Client DOB"}
+          margin="normal"
           hoist={e => {
             setBirthDate(e);
           }}
@@ -153,6 +172,7 @@ function CaseTable(props) {
         />
         <ComposedDatePicker
           label={"Case Terminated On"}
+          margin="normal"
           hoist={e => {
             setTerminationDate(e);
           }}
@@ -172,7 +192,6 @@ function CaseTable(props) {
           );
         })}
       </div>
-
       <CardActionArea onClick={pushCharge}>
         <Typography variant="h6">+ New Charge</Typography>
       </CardActionArea>
