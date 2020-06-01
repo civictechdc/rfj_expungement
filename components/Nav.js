@@ -37,6 +37,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const toTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 export default function NavBar() {
   const classes = useStyles();
 
@@ -64,7 +68,7 @@ export default function NavBar() {
         </CaseContext.Consumer>
 
         <div style={{ display: "flex", flexGrow: 1 }}>
-          <Button color="inherit" className={classes.button}>
+          <Button color="inherit" className={classes.button} onClick={toTop}>
             To Top
           </Button>
 
